@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15C50" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -20,15 +20,35 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="zFU-x1-4Ci">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="75"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Atu-FT-4xj">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="49"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Local Weather" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ufY-yL-HWl">
+                                        <rect key="frame" x="110" y="21.5" width="380" height="20"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="380" id="koD-Py-wf4"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="17"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" red="0.40000000600000002" green="0.80000001190000003" blue="1" alpha="0.59999999999999998" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="75" id="1es-dW-ddq"/>
+                                    <constraint firstAttribute="height" constant="49" id="F1M-lN-9xH"/>
+                                    <constraint firstItem="ufY-yL-HWl" firstAttribute="centerX" secondItem="Atu-FT-4xj" secondAttribute="centerX" id="OjU-iW-O6K"/>
+                                    <constraint firstAttribute="bottom" secondItem="ufY-yL-HWl" secondAttribute="bottom" constant="7" id="hJC-Qh-YTG"/>
+                                </constraints>
+                            </view>
+                            <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="zFU-x1-4Ci">
+                                <rect key="frame" x="0.0" y="49" width="600" height="44"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="1es-dW-ddq"/>
                                 </constraints>
                                 <textInputTraits key="textInputTraits"/>
                             </searchBar>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sFy-BP-e9N" customClass="CurrentWeatherView" customModule="YAWA_Weather" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="75" width="600" height="360"/>
+                                <rect key="frame" x="0.0" y="93" width="600" height="360"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="cloud" translatesAutoresizingMaskIntoConstraints="NO" id="uaG-jH-8rJ">
                                         <rect key="frame" x="44" y="60" width="512" height="162"/>
@@ -92,7 +112,7 @@
                                                         </variation>
                                                     </imageView>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="48°/59°" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wre-Il-dTC">
-                                                        <rect key="frame" x="48" y="188" width="91" height="27"/>
+                                                        <rect key="frame" x="56" y="188" width="75" height="27"/>
                                                         <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="22"/>
                                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                         <nil key="highlightedColor"/>
@@ -119,13 +139,13 @@
                                         </connections>
                                     </view>
                                     <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qAl-G0-NHd" customClass="DailyForecastItemView" customModule="YAWA_Weather" customModuleProvider="target">
-                                        <rect key="frame" x="187" y="0.0" width="187" height="214"/>
+                                        <rect key="frame" x="187" y="0.0" width="186" height="214"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" misplaced="YES" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="0iD-4a-N7t">
-                                                <rect key="frame" x="0.0" y="0.0" width="187" height="214"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="186" height="214"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="MON" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bVl-da-9qb">
-                                                        <rect key="frame" x="71" y="0.0" width="45" height="105"/>
+                                                        <rect key="frame" x="68" y="0.0" width="51" height="105"/>
                                                         <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="21"/>
                                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                         <nil key="highlightedColor"/>
@@ -134,7 +154,7 @@
                                                         </variation>
                                                     </label>
                                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="cloud" translatesAutoresizingMaskIntoConstraints="NO" id="g7t-fM-wpJ">
-                                                        <rect key="frame" x="56" y="105" width="75" height="83"/>
+                                                        <rect key="frame" x="56" y="105" width="74" height="83"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" secondItem="g7t-fM-wpJ" secondAttribute="height" multiplier="28:31" id="NdS-r2-onq"/>
                                                         </constraints>
@@ -143,7 +163,7 @@
                                                         </variation>
                                                     </imageView>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" misplaced="YES" text="48°/59°" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0Gm-61-IRI">
-                                                        <rect key="frame" x="48" y="188" width="91" height="27"/>
+                                                        <rect key="frame" x="56" y="188" width="75" height="27"/>
                                                         <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="22"/>
                                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                         <nil key="highlightedColor"/>
@@ -170,13 +190,13 @@
                                         </connections>
                                     </view>
                                     <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6dt-DP-53X" customClass="DailyForecastItemView" customModule="YAWA_Weather" customModuleProvider="target">
-                                        <rect key="frame" x="374" y="0.0" width="187" height="214"/>
+                                        <rect key="frame" x="373" y="0.0" width="187" height="214"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" misplaced="YES" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="Dwx-PB-Pjf">
                                                 <rect key="frame" x="0.0" y="0.0" width="187" height="214"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="249" verticalCompressionResistancePriority="751" misplaced="YES" text="TUE" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="47t-dX-TgP">
-                                                        <rect key="frame" x="71" y="0.0" width="45" height="105"/>
+                                                        <rect key="frame" x="73" y="0.0" width="42" height="105"/>
                                                         <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="21"/>
                                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                         <nil key="highlightedColor"/>
@@ -194,7 +214,7 @@
                                                         </variation>
                                                     </imageView>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="48°/59°" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wZb-zX-o23">
-                                                        <rect key="frame" x="48" y="188" width="91" height="27"/>
+                                                        <rect key="frame" x="56" y="188" width="75" height="27"/>
                                                         <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="22"/>
                                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                         <nil key="highlightedColor"/>
@@ -231,13 +251,16 @@
                         <color key="backgroundColor" red="0.40000000600000002" green="0.80000001190000003" blue="1" alpha="0.59999999999999998" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="zFU-x1-4Ci" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="A4b-Nc-nIa"/>
-                            <constraint firstItem="sFy-BP-e9N" firstAttribute="top" secondItem="zFU-x1-4Ci" secondAttribute="bottom" id="C8F-76-ldh"/>
                             <constraint firstItem="sFy-BP-e9N" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="Hvr-t2-Sf1"/>
                             <constraint firstAttribute="trailing" secondItem="sFy-BP-e9N" secondAttribute="trailing" id="UlT-3y-4nw"/>
-                            <constraint firstItem="zFU-x1-4Ci" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="aWe-qP-Gn1"/>
+                            <constraint firstItem="sFy-BP-e9N" firstAttribute="top" secondItem="zFU-x1-4Ci" secondAttribute="bottom" id="WvG-X0-Csr"/>
                             <constraint firstAttribute="trailingMargin" secondItem="eIg-7M-QhY" secondAttribute="trailing" id="agR-hn-2uY"/>
                             <constraint firstItem="sFy-BP-e9N" firstAttribute="height" secondItem="8bC-Xf-vdC" secondAttribute="height" multiplier="0.6" id="cUD-70-GJT"/>
                             <constraint firstAttribute="bottomMargin" secondItem="eIg-7M-QhY" secondAttribute="bottom" constant="20" id="ePn-A9-8L8"/>
+                            <constraint firstItem="Atu-FT-4xj" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="hPF-zL-XiY"/>
+                            <constraint firstItem="Atu-FT-4xj" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="lHt-Jb-ltE"/>
+                            <constraint firstAttribute="trailing" secondItem="Atu-FT-4xj" secondAttribute="trailing" id="ltG-Jd-44b"/>
+                            <constraint firstItem="zFU-x1-4Ci" firstAttribute="top" secondItem="Atu-FT-4xj" secondAttribute="bottom" id="nUq-3O-h4z"/>
                             <constraint firstAttribute="trailing" secondItem="zFU-x1-4Ci" secondAttribute="trailing" id="nxm-jY-mr4"/>
                             <constraint firstItem="eIg-7M-QhY" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="oCN-Dt-KZs"/>
                         </constraints>
