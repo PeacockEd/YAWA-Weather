@@ -9,10 +9,22 @@
 import UIKit
 
 class ViewController: UIViewController {
+    
+    @IBOutlet weak var searchBar:UISearchBar!
+    @IBOutlet weak var segmentBar:UISegmentedControl!
+    @IBOutlet weak var currentWeatherView:CurrentWeatherView!
+    @IBOutlet weak var scrollView:UIScrollView!
+    
 
-    override func viewDidLoad() {
+    override func viewDidLoad()
+    {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        print("LOAD!")
+    }
+    
+    override func viewDidLayoutSubviews()
+    {
+        scrollView.contentOffset.y = searchBar.bounds.size.height
     }
 
     override func didReceiveMemoryWarning() {
