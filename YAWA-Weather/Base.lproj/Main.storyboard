@@ -40,8 +40,19 @@
                                     <constraint firstAttribute="bottom" secondItem="ufY-yL-HWl" secondAttribute="bottom" constant="7" id="hJC-Qh-YTG"/>
                                 </constraints>
                             </view>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="iW5-Xz-vaw">
+                                <rect key="frame" x="154.5" y="59" width="290" height="29"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="290" id="gNE-gj-rqR"/>
+                                </constraints>
+                                <segments>
+                                    <segment title="Current Conditions"/>
+                                    <segment title="Details"/>
+                                </segments>
+                                <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            </segmentedControl>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="E1l-Fp-lxh">
-                                <rect key="frame" x="0.0" y="99" width="600" height="420"/>
+                                <rect key="frame" x="0.0" y="99" width="600" height="360"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DWv-rY-Kat">
                                         <rect key="frame" x="0.0" y="0.0" width="600" height="575"/>
@@ -57,17 +68,17 @@
                                                 <rect key="frame" x="0.0" y="44" width="600" height="360"/>
                                                 <subviews>
                                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="cloud" translatesAutoresizingMaskIntoConstraints="NO" id="uaG-jH-8rJ">
-                                                        <rect key="frame" x="44" y="53" width="512" height="162"/>
+                                                        <rect key="frame" x="44" y="53" width="512" height="144"/>
                                                     </imageView>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Thunderstorms" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="18" translatesAutoresizingMaskIntoConstraints="NO" id="KdT-gL-rOc">
-                                                        <rect key="frame" x="165" y="216" width="270" height="45"/>
+                                                        <rect key="frame" x="165" y="198" width="270" height="45"/>
                                                         <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="37"/>
                                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" text="60°" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="18" translatesAutoresizingMaskIntoConstraints="NO" id="0QT-QV-TSv">
-                                                        <rect key="frame" x="232" y="249" width="135" height="107"/>
-                                                        <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="89"/>
+                                                        <rect key="frame" x="243" y="231" width="113.5" height="89.5"/>
+                                                        <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="75"/>
                                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
@@ -81,7 +92,7 @@
                                                 <constraints>
                                                     <constraint firstItem="0rR-8i-A1w" firstAttribute="top" secondItem="sFy-BP-e9N" secondAttribute="top" constant="15" id="5fp-Ht-E3D"/>
                                                     <constraint firstItem="uaG-jH-8rJ" firstAttribute="centerX" secondItem="sFy-BP-e9N" secondAttribute="centerX" id="B9u-nd-vFF"/>
-                                                    <constraint firstItem="uaG-jH-8rJ" firstAttribute="height" secondItem="sFy-BP-e9N" secondAttribute="height" multiplier="0.45" id="NI3-hh-mN9"/>
+                                                    <constraint firstItem="uaG-jH-8rJ" firstAttribute="height" secondItem="sFy-BP-e9N" secondAttribute="height" multiplier="0.4" id="NI3-hh-mN9"/>
                                                     <constraint firstItem="KdT-gL-rOc" firstAttribute="top" secondItem="uaG-jH-8rJ" secondAttribute="bottom" constant="1" id="P3q-0X-j5Z"/>
                                                     <constraint firstItem="0QT-QV-TSv" firstAttribute="top" secondItem="KdT-gL-rOc" secondAttribute="bottom" constant="-12" id="PRp-NB-fVE"/>
                                                     <constraint firstItem="KdT-gL-rOc" firstAttribute="centerX" secondItem="sFy-BP-e9N" secondAttribute="centerX" id="Ugj-BA-Yn9"/>
@@ -273,17 +284,6 @@
                                     <constraint firstItem="EB6-Po-0VH" firstAttribute="top" secondItem="eIg-7M-QhY" secondAttribute="top" id="Qb5-gD-MC9"/>
                                 </constraints>
                             </stackView>
-                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="iW5-Xz-vaw">
-                                <rect key="frame" x="137" y="59" width="325" height="29"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="325" id="gNE-gj-rqR"/>
-                                </constraints>
-                                <segments>
-                                    <segment title="Current Conditions"/>
-                                    <segment title="Details"/>
-                                </segments>
-                                <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                            </segmentedControl>
                         </subviews>
                         <color key="backgroundColor" red="0.40000000600000002" green="0.80000001190000003" blue="1" alpha="0.59999999999999998" colorSpace="calibratedRGB"/>
                         <constraints>
@@ -299,9 +299,15 @@
                             <constraint firstItem="eIg-7M-QhY" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="oCN-Dt-KZs"/>
                             <constraint firstItem="iW5-Xz-vaw" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="rhy-LD-M8u"/>
                             <constraint firstItem="sFy-BP-e9N" firstAttribute="height" secondItem="8bC-Xf-vdC" secondAttribute="height" multiplier="0.6" id="spB-1D-7Pf"/>
-                            <constraint firstItem="E1l-Fp-lxh" firstAttribute="height" secondItem="8bC-Xf-vdC" secondAttribute="height" multiplier="0.7" id="uQE-iV-Kh4"/>
+                            <constraint firstItem="E1l-Fp-lxh" firstAttribute="height" secondItem="8bC-Xf-vdC" secondAttribute="height" multiplier="0.6" id="uQE-iV-Kh4"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="currentWeatherView" destination="sFy-BP-e9N" id="JOX-Kq-fYu"/>
+                        <outlet property="scrollView" destination="E1l-Fp-lxh" id="PF2-dN-XNt"/>
+                        <outlet property="searchBar" destination="zFU-x1-4Ci" id="bnr-xF-nym"/>
+                        <outlet property="segmentBar" destination="iW5-Xz-vaw" id="vJN-bt-QGc"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
