@@ -41,7 +41,7 @@
                                 </constraints>
                             </view>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="iW5-Xz-vaw">
-                                <rect key="frame" x="154.5" y="59" width="290" height="29"/>
+                                <rect key="frame" x="155" y="59" width="290" height="29"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="290" id="gNE-gj-rqR"/>
                                 </constraints>
@@ -64,7 +64,95 @@
                                                 </constraints>
                                                 <textInputTraits key="textInputTraits"/>
                                             </searchBar>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sFy-BP-e9N" customClass="CurrentWeatherView" customModule="YAWA_Weather" customModuleProvider="target">
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qEm-S6-V9u" customClass="WeatherDetailsView" customModule="YAWA_Weather" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="44" width="600" height="525"/>
+                                                <subviews>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Today" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bMt-cd-cLD">
+                                                        <rect key="frame" x="27" y="23" width="60" height="24"/>
+                                                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="20"/>
+                                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Thunderstorms" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fKD-Nd-ZJb">
+                                                        <rect key="frame" x="96" y="56" width="169" height="24"/>
+                                                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="18"/>
+                                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Lo: 42   Hi: 55" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Kha-De-Uwm">
+                                                        <rect key="frame" x="96" y="78" width="169" height="24"/>
+                                                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="18"/>
+                                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="cloud" translatesAutoresizingMaskIntoConstraints="NO" id="P8V-21-us4">
+                                                        <rect key="frame" x="34" y="54" width="50" height="50"/>
+                                                    </imageView>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Wind and Pressure" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VUI-nx-doK">
+                                                        <rect key="frame" x="27" y="225" width="215" height="24"/>
+                                                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="20"/>
+                                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="18 mph NNW" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vtL-nl-WzC">
+                                                        <rect key="frame" x="96" y="280" width="169" height="24"/>
+                                                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="18"/>
+                                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="cloud" translatesAutoresizingMaskIntoConstraints="NO" id="Lhm-Rp-Xmg">
+                                                        <rect key="frame" x="34" y="256" width="50" height="50"/>
+                                                    </imageView>
+                                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5en-wH-WpQ">
+                                                        <rect key="frame" x="20" y="111" width="560" height="1"/>
+                                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    </view>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Sunrise and Sunset" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3r8-yN-zzy">
+                                                        <rect key="frame" x="27" y="123" width="208" height="24"/>
+                                                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="20"/>
+                                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Sunrise" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oFE-N6-OD1">
+                                                        <rect key="frame" x="96" y="156" width="91" height="24"/>
+                                                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="18"/>
+                                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="7:12 am" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2Kn-nD-a0o">
+                                                        <rect key="frame" x="96" y="178" width="117" height="24"/>
+                                                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="18"/>
+                                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="cloud" translatesAutoresizingMaskIntoConstraints="NO" id="530-ou-XgP">
+                                                        <rect key="frame" x="34" y="154" width="50" height="50"/>
+                                                    </imageView>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Sunset" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4aZ-aM-HTq">
+                                                        <rect key="frame" x="281" y="156" width="91" height="24"/>
+                                                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="18"/>
+                                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="6:49 pm" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HId-zT-PKu">
+                                                        <rect key="frame" x="281" y="178" width="117" height="24"/>
+                                                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="18"/>
+                                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="cloud" translatesAutoresizingMaskIntoConstraints="NO" id="5wt-Jp-jLr">
+                                                        <rect key="frame" x="219" y="154" width="50" height="50"/>
+                                                    </imageView>
+                                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="LHU-hF-WsM">
+                                                        <rect key="frame" x="20" y="211" width="560" height="1"/>
+                                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    </view>
+                                                </subviews>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="525" id="x4G-lJ-RBa"/>
+                                                </constraints>
+                                            </view>
+                                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sFy-BP-e9N" customClass="CurrentWeatherView" customModule="YAWA_Weather" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="44" width="600" height="360"/>
                                                 <subviews>
                                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="cloud" translatesAutoresizingMaskIntoConstraints="NO" id="uaG-jH-8rJ">
@@ -104,7 +192,10 @@
                                         </subviews>
                                         <constraints>
                                             <constraint firstItem="zFU-x1-4Ci" firstAttribute="leading" secondItem="DWv-rY-Kat" secondAttribute="leading" id="4di-Pa-BR4"/>
+                                            <constraint firstItem="qEm-S6-V9u" firstAttribute="top" secondItem="zFU-x1-4Ci" secondAttribute="bottom" id="6xo-9Y-f93"/>
+                                            <constraint firstItem="qEm-S6-V9u" firstAttribute="leading" secondItem="DWv-rY-Kat" secondAttribute="leading" id="8XL-qI-K6B"/>
                                             <constraint firstItem="sFy-BP-e9N" firstAttribute="top" secondItem="zFU-x1-4Ci" secondAttribute="bottom" id="Ctb-MF-iLa"/>
+                                            <constraint firstAttribute="trailing" secondItem="qEm-S6-V9u" secondAttribute="trailing" id="FwZ-jV-siI"/>
                                             <constraint firstAttribute="trailing" secondItem="sFy-BP-e9N" secondAttribute="trailing" id="MMH-4N-NAH"/>
                                             <constraint firstItem="sFy-BP-e9N" firstAttribute="leading" secondItem="DWv-rY-Kat" secondAttribute="leading" id="XHA-l9-YQr"/>
                                             <constraint firstItem="zFU-x1-4Ci" firstAttribute="top" secondItem="DWv-rY-Kat" secondAttribute="top" id="bd1-Gj-vGK"/>
@@ -304,6 +395,7 @@
                     </view>
                     <connections>
                         <outlet property="currentWeatherView" destination="sFy-BP-e9N" id="JOX-Kq-fYu"/>
+                        <outlet property="detailsView" destination="qEm-S6-V9u" id="yN5-c6-5vH"/>
                         <outlet property="scrollView" destination="E1l-Fp-lxh" id="PF2-dN-XNt"/>
                         <outlet property="searchBar" destination="zFU-x1-4Ci" id="bnr-xF-nym"/>
                         <outlet property="segmentBar" destination="iW5-Xz-vaw" id="vJN-bt-QGc"/>
