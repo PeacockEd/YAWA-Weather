@@ -21,6 +21,8 @@ class ViewController: UIViewController {
     @IBOutlet weak var scrollView:UIScrollView!
     @IBOutlet weak var detailsView:UIView!
     
+    @IBOutlet weak var scrollingContainerHeightConstraint:NSLayoutConstraint!
+    
 
     override func viewDidLoad()
     {
@@ -28,11 +30,23 @@ class ViewController: UIViewController {
         segmentBar.addTarget(self, action: #selector(ViewController.toggleView(_:)), forControlEvents: .ValueChanged)
         
         detailsView.hidden = true
+        updateViewHeightForDevice()
     }
     
     override func viewDidLayoutSubviews()
     {
         scrollView.contentOffset.y = searchBar.bounds.size.height
+    }
+    
+    func updateViewHeightForDevice()
+    {
+        let deviceType = UIDevice.currentDevice().userInterfaceIdiom
+        switch deviceType {
+        case .Pad:
+            scrollingContainerHeightConstraint.constant = 750
+        default:
+            scrollingContainerHeightConstraint.constant = 525
+        }
     }
     
     func toggleView(segmentControl: UISegmentedControl)

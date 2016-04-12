@@ -9,13 +9,13 @@
 import UIKit
 
 class WeatherDetailsView: UIView {
-
-    /*
-    // Only override drawRect: if you perform custom drawing.
-    // An empty implementation adversely affects performance during animation.
-    override func drawRect(rect: CGRect) {
-        // Drawing code
-    }
-    */
-
+    
+    @IBOutlet weak var todayImg:UIImageView!
+    @IBOutlet weak var todayDescLabel:UILabel!
+    @IBOutlet weak var todayTempLabel:UILabel!
+    
+    @IBOutlet weak var sunriseLabel:UILabel!
+    @IBOutlet weak var sunsetLabel:UILabel!
+    
+    @IBOutlet weak var windLabel:UILabel!
 }

@@ -10,19 +10,14 @@ import UIKit
 
 class CurrentWeatherView: UIView {
     
+    @IBOutlet weak var locationLabel:UILabel!
+    @IBOutlet weak var conditionsImg:UIImageView!
+    @IBOutlet weak var conditionsLabel:UILabel!
+    @IBOutlet weak var temperatureLabel:UILabel!
     
     
     override func awakeFromNib()
     {
         print("I am a current forecast view!")
     }
-    
-    /*
-    // Only override drawRect: if you perform custom drawing.
-    // An empty implementation adversely affects performance during animation.
-    override func drawRect(rect: CGRect) {
-        // Drawing code
-    }
-    */
-
 }
