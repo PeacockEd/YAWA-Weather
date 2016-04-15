@@ -25,6 +25,8 @@ class ViewController: UIViewController, WeatherLocationDelegate {
     @IBOutlet weak var scrollingContainerHeightConstraint:NSLayoutConstraint!
     
     private var isErrorDialogOpen = false;
+    private var currentConditions:CurrentConditions = CurrentConditions()
+    private var forecastItems:[ForecastDayItem]?
     
     let locationManager = LocationManager()
     
@@ -101,7 +103,11 @@ class ViewController: UIViewController, WeatherLocationDelegate {
     
     func didUpdateToLocation(newLocation: CLLocation)
     {
-        //print(newLocation.debugDescription)
+        if let postalCode = locationManager.postalCode {
+            currentConditions.requestCurrentConditions(forPostalCode: postalCode) {
+                // TODO: update UI with current conditions here!
+            }
+        }
     }
     
     override func didReceiveMemoryWarning() {
