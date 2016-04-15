@@ -66,7 +66,6 @@ class LocationManager: NSObject, CLLocationManagerDelegate {
                     {
                         // App only supports US locations at this time
                         if let range = country.rangeOfString("United States") where !range.isEmpty {
-                            print(postalCode)
                             self._postalCode = postalCode
                             self.locationManager.stopUpdatingLocation()
                         } else {
