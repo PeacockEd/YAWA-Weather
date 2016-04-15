@@ -7,8 +7,9 @@
 //
 
 import UIKit
+import MapKit
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, WeatherLocationDelegate {
     
     private enum WeatherViewState: Int
     {
@@ -23,14 +24,28 @@ class ViewController: UIViewController {
     
     @IBOutlet weak var scrollingContainerHeightConstraint:NSLayoutConstraint!
     
-
+    private var isErrorDialogOpen = false;
+    
+    let locationManager = LocationManager()
+    
+    
     override func viewDidLoad()
     {
         super.viewDidLoad()
+        
         segmentBar.addTarget(self, action: #selector(ViewController.toggleView(_:)), forControlEvents: .ValueChanged)
         
         detailsView.hidden = true
         updateViewHeightForDevice()
+        
+        locationManager.delegate = self
+        locationManager.getLocation()
+    }
+    
+    override func viewDidAppear(animated: Bool)
+    {
+        super.viewDidAppear(animated)
+        locationManager.locationAuthStatus()
     }
     
     override func viewDidLayoutSubviews()
@@ -63,12 +78,35 @@ class ViewController: UIViewController {
             }
         }
     }
-
+    
+    func showErrorPrompt(message: String)
+    {
+        if !isErrorDialogOpen {
+            let alertController = UIAlertController(title: "Application Error", message: message, preferredStyle: .Alert)
+            
+            let okAction = UIAlertAction(title: "OK", style: .Default) { (action) in
+                self.isErrorDialogOpen = false
+            }
+            alertController.addAction(okAction)
+            
+            self.presentViewController(alertController, animated: true, completion: nil)
+            isErrorDialogOpen = true
+        }
+    }
+    
+    func locationDidFailWithError(error: NSError?, message: LocationDetailsErrorMessage)
+    {
+        showErrorPrompt(message.rawValue)
+    }
+    
+    func didUpdateToLocation(newLocation: CLLocation)
+    {
+        //print(newLocation.debugDescription)
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
-
 }
 
