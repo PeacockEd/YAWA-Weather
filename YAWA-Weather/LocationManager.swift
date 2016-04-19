@@ -68,6 +68,7 @@ class LocationManager: NSObject, CLLocationManagerDelegate {
                         if let range = country.rangeOfString("United States") where !range.isEmpty {
                             self._postalCode = postalCode
                             self.locationManager.stopUpdatingLocation()
+                            self.delegate?.didUpdateToLocation(newLocation)
                         } else {
                             self.delegate?.locationDidFailWithError(nil, message: .LOCATION_NOT_SUPPORTED)
                         }
@@ -75,6 +76,5 @@ class LocationManager: NSObject, CLLocationManagerDelegate {
                 }
             }
         }
-        delegate?.didUpdateToLocation(newLocation)
     }
 }

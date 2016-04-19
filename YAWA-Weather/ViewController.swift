@@ -21,12 +21,13 @@ class ViewController: UIViewController, WeatherLocationDelegate {
     @IBOutlet weak var currentWeatherView:CurrentWeatherView!
     @IBOutlet weak var scrollView:UIScrollView!
     @IBOutlet weak var detailsView:UIView!
+    @IBOutlet var forecastViewItems: [DailyForecastItemView]!
     
     @IBOutlet weak var scrollingContainerHeightConstraint:NSLayoutConstraint!
     
     private var isErrorDialogOpen = false;
-    private var currentConditions:CurrentConditions = CurrentConditions()
-    private var forecastItems:[ForecastDayItem]?
+    private var currentConditions = CurrentConditions()
+    private var forecastData = ForecastItems()
     
     let locationManager = LocationManager()
     
@@ -39,6 +40,8 @@ class ViewController: UIViewController, WeatherLocationDelegate {
         
         detailsView.hidden = true
         updateViewHeightForDevice()
+        
+        updateUI()
         
         locationManager.delegate = self
         locationManager.getLocation()
@@ -53,6 +56,17 @@ class ViewController: UIViewController, WeatherLocationDelegate {
     override func viewDidLayoutSubviews()
     {
         scrollView.contentOffset.y = searchBar.bounds.size.height
+    }
+    
+    private func updateUI()
+    {
+        currentWeatherView.data = currentConditions
+        for item in forecastViewItems {
+            let tag = item.tag
+            if let data = forecastData.getForecastItem(forIndex: tag) {
+                item.data = data
+            }
+        }
     }
     
     func updateViewHeightForDevice()
@@ -103,9 +117,16 @@ class ViewController: UIViewController, WeatherLocationDelegate {
     
     func didUpdateToLocation(newLocation: CLLocation)
     {
+        print("update location")
+        //AppUtils.getFormattedTimeString(forTimestampString: "1460986053")
+        
         if let postalCode = locationManager.postalCode {
+            print("postal code: \(postalCode)")
             currentConditions.requestCurrentConditions(forPostalCode: postalCode) {
-                // TODO: update UI with current conditions here!
+                //if let dict =
+                self.forecastData.requestForecastData(forPostalCode: postalCode) {
+                    //self.updateUI()
+                }
             }
         }
     }

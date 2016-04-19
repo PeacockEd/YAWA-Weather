@@ -13,7 +13,8 @@ import Foundation
 
 let API_KEY = ""
 let CURRENT_WEATHER_URL = "http://api.openweathermap.org/data/2.5/weather/?"
-let TOTAL_FORECAST_ITEMS = 3
 let FORECAST_WEATHER_URL = "http://api.openweathermap.org/data/2.5/forecast?"
+let TOTAL_FORECAST_ITEMS = 3
+let DEGREES_SYMBOL = "°"
 
 typealias DownloadComplete = () -> ()
