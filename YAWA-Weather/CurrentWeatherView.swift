@@ -15,9 +15,23 @@ class CurrentWeatherView: UIView {
     @IBOutlet weak var conditionsLabel:UILabel!
     @IBOutlet weak var temperatureLabel:UILabel!
     
+    private var _data = CurrentConditions()
     
-    override func awakeFromNib()
+    var data: CurrentConditions {
+        set {
+            _data = newValue
+            updateUI()
+        }
+        get {
+            return _data
+        }
+    }
+    
+    private func updateUI()
     {
-        print("I am a current forecast view!")
+        locationLabel.text = data.currentLocation
+        conditionsImg.image = UIImage(named: "\(data.conditionsImageId).png")
+        conditionsLabel.text = data.currentConditionsDesc
+        temperatureLabel.text = data.currentTemp
     }
 }

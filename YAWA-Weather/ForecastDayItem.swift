@@ -10,7 +10,7 @@ import Foundation
 
 class ForecastDayItem {
     
-    private var _dayName = "---"
+    private var _dayName = ""
     private var _conditionsImageId = "00"
     private var _temperatureInfo = "..."
     

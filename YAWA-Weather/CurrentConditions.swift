@@ -14,17 +14,18 @@ class CurrentConditions {
     // by zip
     // http://api.openweathermap.org/data/2.5/weather/?zip=94102,us&APPID=
     
-    // by location data
-    // http://api.openweathermap.org/data/2.5/weather/?lon=-134.3&lat=-80.12&APPID=
-    
-    private var _currentLocation = "..."
-    private var _currentTemp = "--"
+    private var _currentLocation = "Retrieving data ..."
+    private var _currentTemp = ""
+    private var _currentConditionsDesc = ""
+    private var _humidity = ""
+    private var _pressure = ""
     private var _forecastHiTemp = "--"
     private var _forecastLoTemp = "--"
     private var _sunriseTime = "-:-- am"
     private var _sunsetTime = "-:-- pm"
     private var _conditionsImageId = "00"
-    private var _windData = ""
+    private var _windDirection = ""
+    private var _windSpeed = ""
     
     
     var currentLocation:String {
@@ -33,9 +34,27 @@ class CurrentConditions {
         }
     }
     
+    var currentConditionsDesc:String {
+        get {
+            return _currentConditionsDesc
+        }
+    }
+    
     var currentTemp:String {
         get {
             return _currentTemp
+        }
+    }
+    
+    var humidity:String {
+        get {
+            return _humidity
+        }
+    }
+    
+    var pressure:String {
+        get {
+            return _pressure
         }
     }
     
@@ -69,9 +88,15 @@ class CurrentConditions {
         }
     }
     
-    var windData:String {
+    var windSpeed:String {
         get {
-            return _windData
+            return _windSpeed
+        }
+    }
+    
+    var windDirection:String {
+        get {
+            return _windDirection
         }
     }
     
@@ -81,8 +106,31 @@ class CurrentConditions {
         let url = NSURL(string: weatherUrl)!
         
         Alamofire.request(.GET, url).responseJSON { response in
-            let result = response.result
-            print(result.debugDescription)
+            if let result = response.result.value {
+                print(result.debugDescription)
+                if let dict = result as? Dictionary<String, AnyObject> {
+                    if let code = dict["cod"] as? String {
+                        if code == "200" {
+                            if let weather = dict["weather"] as? Dictionary<String, AnyObject> {
+                                if let imageId = weather["icon"] as? String {
+                                    self._conditionsImageId = imageId
+                                }
+                                if let description = weather["main"] as? String {
+                                    self._currentConditionsDesc = description
+                                }
+                            }
+                            if let wind = dict["wind"] as? Dictionary<String, AnyObject> {
+                                if let direction = wind["deg"] as? String {
+                                    self._windDirection = AppUtils.calculateWindDirection(direction)
+                                }
+                                if let speed = wind["speed"] as? String {
+                                    self._windSpeed = speed
+                                }
+                            }
+                        }
+                    }
+                }
+            }
             complete()
         }
     }

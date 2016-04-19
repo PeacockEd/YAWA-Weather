@@ -339,7 +339,7 @@
                                             <outlet property="img" destination="g90-yO-Eti" id="476-f5-MDg"/>
                                         </connections>
                                     </view>
-                                    <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qAl-G0-NHd" customClass="DailyForecastItemView" customModule="YAWA_Weather" customModuleProvider="target">
+                                    <view tag="1" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qAl-G0-NHd" customClass="DailyForecastItemView" customModule="YAWA_Weather" customModuleProvider="target">
                                         <rect key="frame" x="187" y="0.0" width="186" height="214"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" misplaced="YES" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="0iD-4a-N7t">
@@ -390,7 +390,7 @@
                                             <outlet property="img" destination="g7t-fM-wpJ" id="C2e-wH-FrJ"/>
                                         </connections>
                                     </view>
-                                    <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6dt-DP-53X" customClass="DailyForecastItemView" customModule="YAWA_Weather" customModuleProvider="target">
+                                    <view tag="2" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6dt-DP-53X" customClass="DailyForecastItemView" customModule="YAWA_Weather" customModuleProvider="target">
                                         <rect key="frame" x="373" y="0.0" width="187" height="214"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" misplaced="YES" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="Dwx-PB-Pjf">
@@ -473,6 +473,9 @@
                         <outlet property="scrollingContainerHeightConstraint" destination="cKU-oA-DuV" id="MUd-Wt-8J1"/>
                         <outlet property="searchBar" destination="zFU-x1-4Ci" id="bnr-xF-nym"/>
                         <outlet property="segmentBar" destination="iW5-Xz-vaw" id="vJN-bt-QGc"/>
+                        <outletCollection property="forecastViewItems" destination="EB6-Po-0VH" collectionClass="NSMutableArray" id="tyk-CQ-O4d"/>
+                        <outletCollection property="forecastViewItems" destination="qAl-G0-NHd" collectionClass="NSMutableArray" id="4cp-fc-eah"/>
+                        <outletCollection property="forecastViewItems" destination="6dt-DP-53X" collectionClass="NSMutableArray" id="pS0-b9-7h5"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
