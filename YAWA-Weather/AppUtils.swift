@@ -10,26 +10,34 @@ import Foundation
 
 class AppUtils {
     
-    static func calculateWindDirection(forDegrees: String) -> String
+    static func calculateWindDirection(forDegrees: Double) -> String
     {
-        if let deg = Double(forDegrees) {
-            let val = (deg / 22.5) + 0.5
-            let directions = ["N","NNE","NE","ENE","E","ESE", "SE", "SSE","S","SSW","SW","WSW","W","WNW","NW","NNW"]
-            let index = Int(val % 16)
-            return directions[index]
-        } else {
-            return ""
-        }
+        let val = (forDegrees / 22.5) + 0.5
+        let directions = ["N","NNE","NE","ENE","E","ESE", "SE", "SSE","S","SSW","SW","WSW","W","WNW","NW","NNW"]
+        let index = Int(val % 16)
+        
+        return directions[index]
     }
     
-    static func getFormattedTimeString(forTimestampString timestamp:String) -> String
+    static func getFormattedTimeString(forTimestamp timestamp:Double,
+                                        withRawOffsetSeconds offset:Int,
+                                        withDstOffset dstOffset:Int) -> String
     {
-        let now = NSDate(timeIntervalSince1970: Double(timestamp)!)
+        let totalOffset = abs(offset + dstOffset)
+        let hoursOffset = Double((totalOffset / 60) / 60)
+        let now = NSDate(timeIntervalSince1970: timestamp)
+        let adjustedDate = now.dateByAddingTimeInterval(-60 * 60 * hoursOffset)
         let dateFormatter = NSDateFormatter()
+        dateFormatter.timeZone = NSTimeZone(name: "UTC")
         dateFormatter.dateFormat = "H:mm a 'on' MMMM dd, yyyy"
         dateFormatter.AMSymbol = "AM"
         dateFormatter.PMSymbol = "PM"
         
-        return dateFormatter.stringFromDate(now)
+        return dateFormatter.stringFromDate(adjustedDate)
+    }
+    
+    static func getFormattedTimeString(forTimestamp timestamp:Double) -> String
+    {
+        return getFormattedTimeString(forTimestamp: timestamp, withRawOffsetSeconds: 0, withDstOffset: 0)
     }
 }

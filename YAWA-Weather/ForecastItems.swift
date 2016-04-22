@@ -37,7 +37,7 @@ class ForecastItems {
         Alamofire.request(.GET, url).responseJSON { response in
             let result = response.result
             //print(result.debugDescription)
-            complete()
+            //complete()
         }
     }
 }

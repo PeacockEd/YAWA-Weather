@@ -60,7 +60,7 @@ class ViewController: UIViewController, WeatherLocationDelegate {
     
     private func updateUI()
     {
-        currentWeatherView.data = currentConditions
+        currentWeatherView.updateUI(withCurrentConditions: currentConditions)
         for item in forecastViewItems {
             let tag = item.tag
             if let data = forecastData.getForecastItem(forIndex: tag) {
@@ -118,16 +118,27 @@ class ViewController: UIViewController, WeatherLocationDelegate {
     func didUpdateToLocation(newLocation: CLLocation)
     {
         print("update location")
-        //AppUtils.getFormattedTimeString(forTimestampString: "1460986053")
+        //AppUtils.getFormattedTimeString(forTimestamp: 1461245018, withRawOffsetSeconds: -28800, withDstOffset: 3600)
+        //return
         
         if let postalCode = locationManager.postalCode {
             print("postal code: \(postalCode)")
-            currentConditions.requestCurrentConditions(forPostalCode: postalCode) {
-                //if let dict =
-                self.forecastData.requestForecastData(forPostalCode: postalCode) {
-                    //self.updateUI()
+            
+            currentConditions.requestCurrentConditions(forPostalCode: postalCode, complete: { (error) in
+                guard error.errorCondition == nil else {
+                    // TODO: Handle error someway/somehow
+                    print("error!! \(error.errorCondition)")
+                    return
                 }
-            }
+                self.forecastData.requestForecastData(forPostalCode: postalCode, complete: { (error) in
+                    guard error.errorCondition == nil else {
+                        // TODO: Handle error someway/somehow
+                        print("error 2!! \(error.errorCondition)")
+                        return
+                    }
+                })
+                self.updateUI()
+            })
         }
     }
     
