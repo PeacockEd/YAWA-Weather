@@ -15,19 +15,7 @@ class CurrentWeatherView: UIView {
     @IBOutlet weak var conditionsLabel:UILabel!
     @IBOutlet weak var temperatureLabel:UILabel!
     
-    private var _data = CurrentConditions()
-    
-    var data: CurrentConditions {
-        set {
-            _data = newValue
-            updateUI()
-        }
-        get {
-            return _data
-        }
-    }
-    
-    private func updateUI()
+    func updateUI(withCurrentConditions data: CurrentConditions)
     {
         locationLabel.text = data.currentLocation
         conditionsImg.image = UIImage(named: "\(data.conditionsImageId).png")
