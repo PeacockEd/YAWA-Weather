@@ -1,5 +1,5 @@
 //
-//  ForecastItems.swift
+//  ForecastData.swift
 //  YAWA-Weather
 //
 //  Created by Edward P. Kelly on 4/15/16.
@@ -9,7 +9,7 @@
 import Foundation
 import Alamofire
 
-class ForecastItems {
+class ForecastData {
     
     // by zip
     // http://api.openweathermap.org/data/2.5/forecast?zip=94102,us&APPID=
@@ -29,9 +29,14 @@ class ForecastItems {
         return items[index]
     }
     
-    func requestForecastData(forPostalCode postalCode:String, complete:DownloadComplete)
+    func requestForecastData(forLocation loc:Dictionary<String, Double>, complete:DownloadComplete)
     {
-        let weatherUrl = "\(FORECAST_WEATHER_URL)zip=\(postalCode),us&APPID=\(API_KEY)"
+        guard let lat = loc["lat"], let lng = loc["lng"] else {
+            complete(DataError.FormatError("Unable to perform request."))
+            return
+        }
+        
+        let weatherUrl = "\(FORECAST_WEATHER_URL)lon=\(lng)&lat=\(lat)&APPID=\(API_KEY)"
         let url = NSURL(string: weatherUrl)!
         
         Alamofire.request(.GET, url).responseJSON { response in

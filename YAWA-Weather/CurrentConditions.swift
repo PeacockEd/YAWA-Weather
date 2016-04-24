@@ -112,9 +112,14 @@ class CurrentConditions {
         }
     }
     
-    func requestCurrentConditions(forPostalCode postalCode:String, complete: DownloadComplete)
+    func requestCurrentConditions(forLocation loc:Dictionary<String, Double>, complete: DownloadComplete)
     {
-        let weatherUrl = "\(CURRENT_WEATHER_URL)zip=\(postalCode),us&APPID=\(API_KEY)"
+        guard let lat = loc["lat"], let lng = loc["lng"] else {
+            complete(DataError.FormatError("Unable to perform request."))
+            return
+        }
+        
+        let weatherUrl = "\(CURRENT_WEATHER_URL)lat=\(lat)&lon=\(lng)&APPID=\(API_KEY)"
         let url = NSURL(string: weatherUrl)!
         
         Alamofire.request(.GET, url).responseJSON { response in

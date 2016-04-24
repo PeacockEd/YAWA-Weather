@@ -24,15 +24,8 @@ class LocationManager: NSObject, CLLocationManagerDelegate {
     weak var delegate:WeatherLocationDelegate?
     
     private let locationManager = CLLocationManager()
-    private var geoCoder = CLGeocoder()
+    //private var geoCoder = CLGeocoder()
     
-    private var _postalCode:String?
-    
-    var postalCode: String? {
-        get {
-            return _postalCode
-        }
-    }
     
     func getLocation()
     {
@@ -57,6 +50,11 @@ class LocationManager: NSObject, CLLocationManagerDelegate {
     
     func locationManager(manager: CLLocationManager, didUpdateToLocation newLocation: CLLocation, fromLocation oldLocation: CLLocation)
     {
+        // update location only on app launch
+        delegate?.didUpdateToLocation(newLocation)
+        locationManager.stopUpdatingLocation()
+        
+        /*
         geoCoder.reverseGeocodeLocation(newLocation) { (placemarks, error) in
             if error == nil {
                 if let placemarks = placemarks where placemarks.count > 0 {
@@ -76,5 +74,6 @@ class LocationManager: NSObject, CLLocationManagerDelegate {
                 }
             }
         }
+        */
     }
 }
