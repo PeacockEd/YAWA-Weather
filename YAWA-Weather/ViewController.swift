@@ -8,6 +8,7 @@
 
 import UIKit
 import MapKit
+import Alamofire
 
 class ViewController: UIViewController, WeatherLocationDelegate {
     
@@ -27,7 +28,7 @@ class ViewController: UIViewController, WeatherLocationDelegate {
     
     private var isErrorDialogOpen = false;
     private var currentConditions = CurrentConditions()
-    private var forecastData = ForecastItems()
+    private var forecastData = ForecastData()
     
     let locationManager = LocationManager()
     
@@ -61,7 +62,7 @@ class ViewController: UIViewController, WeatherLocationDelegate {
     private func updateUI()
     {
         currentWeatherView.updateUI(withCurrentConditions: currentConditions)
-        detailsView.updateUI(withCurrentConditions: currentConditions)
+        detailsView.updateUI(withCurrentConditions: currentConditions, withForecastData: forecastData)
         
         for item in forecastViewItems {
             let tag = item.tag
@@ -121,25 +122,36 @@ class ViewController: UIViewController, WeatherLocationDelegate {
     {
         print("update location")
         
-        if let postalCode = locationManager.postalCode {
-            print("postal code: \(postalCode)")
-            
-            currentConditions.requestCurrentConditions(forPostalCode: postalCode, complete: { (error) in
+        /*
+         let url = "https://maps.googleapis.com/maps/api/place/autocomplete/json"
+         Alamofire.request(.GET, url, parameters: ["input":"los angeles ca", "type":"geocode", "key":GOOGLE_API_KEY]).responseJSON { (response) in
+         print(response.result.value)
+         }
+         
+         let url = "https://maps.googleapis.com/maps/api/place/details/json"
+         Alamofire.request(.GET, url, parameters: ["placeid": "", "key":GOOGLE_API_KEY]).responseJSON { (response) in
+         print(response.result.value)
+         }
+         */
+        //return
+        
+        let locPoint = ["lat": newLocation.coordinate.latitude, "lng": newLocation.coordinate.longitude]
+        
+        currentConditions.requestCurrentConditions(forLocation: locPoint, complete: { (error) in
+            guard error.errorCondition == nil else {
+                // TODO: Handle error someway/somehow
+                print("error!! \(error.errorCondition!)")
+                return
+            }
+            self.forecastData.requestForecastData(forLocation: locPoint, complete: { (error) in
                 guard error.errorCondition == nil else {
                     // TODO: Handle error someway/somehow
-                    print("error!! \(error.errorCondition!)")
+                    print("error 2!! \(error.errorCondition!)")
                     return
                 }
-                self.forecastData.requestForecastData(forPostalCode: postalCode, complete: { (error) in
-                    guard error.errorCondition == nil else {
-                        // TODO: Handle error someway/somehow
-                        print("error 2!! \(error.errorCondition!)")
-                        return
-                    }
-                    self.updateUI()
-                })
+                self.updateUI()
             })
-        }
+        })
     }
     
     override func didReceiveMemoryWarning() {
