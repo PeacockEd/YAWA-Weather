@@ -79,7 +79,7 @@ class CurrentConditions {
             if _sunriseTime <= 0 {
                 return "-:-- am"
             } else {
-                return "\(AppUtils.getFormattedTimeString(forTimestamp: _sunriseTime, withRawOffsetSeconds: _timeOffset, withDstOffset: _dstOffset)))"
+                return "\(AppUtils.getFormattedTimeString(forTimestamp: _sunriseTime, withRawOffsetSeconds: _timeOffset, withDstOffset: _dstOffset))"
             }
         }
     }
@@ -208,8 +208,9 @@ class CurrentConditions {
                 }
                 self._timeOffset = rawOffset
                 self._dstOffset = dstOffset
+                
+                complete(DataError.None)
             }
-            complete(DataError.None)
         }
     }
 }

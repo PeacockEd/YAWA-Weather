@@ -17,7 +17,7 @@ let GOOGLE_TIMEZONE_URL = "https://maps.googleapis.com/maps/api/timezone/json?"
 // SEE http://openweathermap.org/ FOR MORE INFO
 let API_KEY = ""
 let CURRENT_WEATHER_URL = "http://api.openweathermap.org/data/2.5/weather/?units=imperial&"
-let FORECAST_WEATHER_URL = "http://api.openweathermap.org/data/2.5/forecast?units=imperial&"
+let FORECAST_WEATHER_URL = "http://api.openweathermap.org/data/2.5/forecast/daily?units=imperial&"
 let TOTAL_FORECAST_ITEMS = 3
 let DEGREES_SYMBOL = "°"
 
