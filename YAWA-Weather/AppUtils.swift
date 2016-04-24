@@ -29,7 +29,8 @@ class AppUtils {
         let adjustedDate = now.dateByAddingTimeInterval(-60 * 60 * hoursOffset)
         let dateFormatter = NSDateFormatter()
         dateFormatter.timeZone = NSTimeZone(name: "UTC")
-        dateFormatter.dateFormat = "H:mm a 'on' MMMM dd, yyyy"
+        dateFormatter.dateFormat = "h:mm a"
+        //dateFormatter.dateFormat = "H:mm a 'on' MMMM dd, yyyy"
         dateFormatter.AMSymbol = "AM"
         dateFormatter.PMSymbol = "PM"
         

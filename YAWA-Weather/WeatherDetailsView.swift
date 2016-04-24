@@ -18,4 +18,16 @@ class WeatherDetailsView: UIView {
     @IBOutlet weak var sunsetLabel:UILabel!
     
     @IBOutlet weak var windLabel:UILabel!
+    
+    func updateUI(withCurrentConditions data:CurrentConditions)
+    {
+        todayImg.image = UIImage(named: "\(data.conditionsImageId).png")
+        todayDescLabel.text = data.currentConditionsDesc
+        todayTempLabel.text = data.currentTemp
+        
+        sunriseLabel.text = data.sunriseTime
+        sunsetLabel.text = data.sunsetTime
+        
+        windLabel.text = "\(data.windDirection) @\(data.windSpeed) MPH"
+    }
 }

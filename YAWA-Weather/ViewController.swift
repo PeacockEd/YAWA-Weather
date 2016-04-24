@@ -20,7 +20,7 @@ class ViewController: UIViewController, WeatherLocationDelegate {
     @IBOutlet weak var segmentBar:UISegmentedControl!
     @IBOutlet weak var currentWeatherView:CurrentWeatherView!
     @IBOutlet weak var scrollView:UIScrollView!
-    @IBOutlet weak var detailsView:UIView!
+    @IBOutlet weak var detailsView:WeatherDetailsView!
     @IBOutlet var forecastViewItems: [DailyForecastItemView]!
     
     @IBOutlet weak var scrollingContainerHeightConstraint:NSLayoutConstraint!
@@ -61,6 +61,8 @@ class ViewController: UIViewController, WeatherLocationDelegate {
     private func updateUI()
     {
         currentWeatherView.updateUI(withCurrentConditions: currentConditions)
+        detailsView.updateUI(withCurrentConditions: currentConditions)
+        
         for item in forecastViewItems {
             let tag = item.tag
             if let data = forecastData.getForecastItem(forIndex: tag) {
@@ -118,8 +120,6 @@ class ViewController: UIViewController, WeatherLocationDelegate {
     func didUpdateToLocation(newLocation: CLLocation)
     {
         print("update location")
-        //AppUtils.getFormattedTimeString(forTimestamp: 1461245018, withRawOffsetSeconds: -28800, withDstOffset: 3600)
-        //return
         
         if let postalCode = locationManager.postalCode {
             print("postal code: \(postalCode)")
@@ -127,17 +127,17 @@ class ViewController: UIViewController, WeatherLocationDelegate {
             currentConditions.requestCurrentConditions(forPostalCode: postalCode, complete: { (error) in
                 guard error.errorCondition == nil else {
                     // TODO: Handle error someway/somehow
-                    print("error!! \(error.errorCondition)")
+                    print("error!! \(error.errorCondition!)")
                     return
                 }
                 self.forecastData.requestForecastData(forPostalCode: postalCode, complete: { (error) in
                     guard error.errorCondition == nil else {
                         // TODO: Handle error someway/somehow
-                        print("error 2!! \(error.errorCondition)")
+                        print("error 2!! \(error.errorCondition!)")
                         return
                     }
+                    self.updateUI()
                 })
-                self.updateUI()
             })
         }
     }

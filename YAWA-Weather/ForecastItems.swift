@@ -35,9 +35,20 @@ class ForecastItems {
         let url = NSURL(string: weatherUrl)!
         
         Alamofire.request(.GET, url).responseJSON { response in
-            let result = response.result
-            //print(result.debugDescription)
-            //complete()
+            print(response.result.debugDescription)
+            
+            guard let result = response.result.value else {
+                let err:DataError = .ServerError("Unexpected Response.")
+                complete(err)
+                return
+            }
+            guard let dict = result as? Dictionary<String, AnyObject>,
+                let code = dict["cod"] as? String where code == "200" else {
+                    let err:DataError = .ServerError("Server responded with value other than 200.")
+                    complete(err)
+                    return
+            }
+            complete(DataError.None)
         }
     }
 }
