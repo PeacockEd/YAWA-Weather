@@ -11,16 +11,11 @@ import Alamofire
 
 class CurrentConditions {
     
-    // by zip
-    // http://api.openweathermap.org/data/2.5/weather/?zip=94102,us&APPID=
-    
     private var _currentLocation = "Retrieving data ..."
     private var _currentTemp = 0.0
     private var _currentConditionsDesc = ""
     private var _humidity = 0.0
     private var _pressure = 0.0
-    private var _forecastHiTemp = 0.0
-    private var _forecastLoTemp = 0.0
     private var _sunriseTime = 0.0
     private var _sunsetTime = 0.0
     private var _conditionsImageId = "00"
@@ -59,18 +54,6 @@ class CurrentConditions {
     var pressure:String {
         get {
             return "\(Int(_pressure))"
-        }
-    }
-    
-    var forecastHiTemp:String {
-        get {
-            return "\(Int(_forecastHiTemp))\(DEGREES_SYMBOL)"
-        }
-    }
-    
-    var forecastLoTemp:String {
-        get {
-            return "\(Int(_forecastLoTemp))\(DEGREES_SYMBOL)"
         }
     }
     
@@ -153,17 +136,13 @@ class CurrentConditions {
             guard let main = dict["main"] as? Dictionary<String, AnyObject>,
                 let humidity = main["humidity"] as? Double,
                 let pressure = main["pressure"] as? Double,
-                let temp = main["temp"] as? Double,
-                let temp_min = main["temp_min"] as? Double,
-                let temp_max = main["temp_max"] as? Double else {
+                let temp = main["temp"] as? Double else {
                     complete(DataError.FormatError("Data response in invalid format."))
                     return
             }
             self._humidity = humidity
             self._pressure = pressure
             self._currentTemp = temp
-            self._forecastLoTemp = temp_min
-            self._forecastHiTemp = temp_max
             
             guard let sys = dict["sys"] as? Dictionary<String, AnyObject>,
                 let sunrise = sys["sunrise"] as? Double,

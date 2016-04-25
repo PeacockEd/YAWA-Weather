@@ -12,7 +12,9 @@ class ForecastDayItem {
     
     private var _dayName = ""
     private var _conditionsImageId = "00"
-    private var _temperatureInfo = "..."
+    private var _temperatureMin = 0.0
+    private var _temperatureMax = 0.0
+    private var _forecastTimestamp:Double?
     
     
     var dayName:String {
@@ -25,11 +27,72 @@ class ForecastDayItem {
         get {
             return _conditionsImageId
         }
+        set {
+            _conditionsImageId = newValue
+        }
     }
     
     var temperatureInfo:String {
         get {
-            return _temperatureInfo
+            return "\(Int(_temperatureMin))\(DEGREES_SYMBOL)/\(Int(_temperatureMax))\(DEGREES_SYMBOL)"
+        }
+    }
+    
+    var temperatureMin:Double
+    {
+        get {
+            return _temperatureMin
+        }
+        set {
+            _temperatureMin = newValue
+        }
+    }
+    
+    var forecastMinTemp:String
+        {
+        get {
+            return "\(Int(_temperatureMin))\(DEGREES_SYMBOL)"
+        }
+    }
+    
+    var temperatureMax:Double {
+        get {
+            return _temperatureMax
+        }
+        set {
+            _temperatureMax = newValue
+        }
+    }
+    
+    var forecastMaxTemp:String
+        {
+        get {
+            return "\(Int(_temperatureMax))\(DEGREES_SYMBOL)"
+        }
+    }
+    
+    var forecastTimestamp:Double
+        {
+        get {
+            if _forecastTimestamp == nil {
+                return NSDate().timeIntervalSince1970 * 1000
+            }
+            return _forecastTimestamp!
+        }
+        set {
+            _forecastTimestamp = newValue
+            calculateDayName()
+        }
+    }
+    
+    private func calculateDayName()
+    {
+        _dayName = ""
+        if let time = _forecastTimestamp {
+            let date = NSDate(timeIntervalSince1970: time)
+            let formatter = NSDateFormatter()
+            formatter.dateFormat = "EEE"
+            _dayName = formatter.stringFromDate(date).uppercaseString
         }
     }
 }

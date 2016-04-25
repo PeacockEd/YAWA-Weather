@@ -17,8 +17,12 @@ let GOOGLE_TIMEZONE_URL = "https://maps.googleapis.com/maps/api/timezone/json?"
 // SEE http://openweathermap.org/ FOR MORE INFO
 let API_KEY = ""
 let CURRENT_WEATHER_URL = "http://api.openweathermap.org/data/2.5/weather/?units=imperial&"
-let FORECAST_WEATHER_URL = "http://api.openweathermap.org/data/2.5/forecast/daily?units=imperial&"
+let FORECAST_WEATHER_URL = "http://api.openweathermap.org/data/2.5/forecast/daily?cnt=4&units=imperial&"
 let TOTAL_FORECAST_ITEMS = 3
 let DEGREES_SYMBOL = "°"
 
+typealias SuggestionResponse = Dictionary<String, String>
+typealias GeoDetailsResponse = Dictionary<String, Double>
 typealias DownloadComplete = (DataError) -> ()
+typealias SuggestionsDownloadComplete = (PlacesResult<SuggestionResponse, DataError>) -> ()
+typealias GeoDetailsDownloadComplete = (PlacesResult<GeoDetailsResponse, DataError>) -> ()
