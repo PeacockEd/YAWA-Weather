@@ -8,7 +8,7 @@
 
 import UIKit
 import MapKit
-import Alamofire
+
 
 class ViewController: UIViewController, WeatherLocationDelegate {
     
@@ -31,6 +31,8 @@ class ViewController: UIViewController, WeatherLocationDelegate {
     private var forecastData = ForecastData()
     
     let locationManager = LocationManager()
+    
+    private var firstView = true
     
     
     override func viewDidLoad()
@@ -56,16 +58,19 @@ class ViewController: UIViewController, WeatherLocationDelegate {
     
     override func viewDidLayoutSubviews()
     {
-        scrollView.contentOffset.y = searchBar.bounds.size.height
+        if firstView {
+            scrollView.contentOffset.y = searchBar.bounds.size.height
+            firstView = false
+        }
     }
     
     private func updateUI()
     {
         currentWeatherView.updateUI(withCurrentConditions: currentConditions)
-        detailsView.updateUI(withCurrentConditions: currentConditions, withForecastData: forecastData)
+        detailsView.updateUI(withCurrentConditions: currentConditions, withForecastData: forecastData.getForecastItem(forIndex: 0) ?? ForecastDayItem())
         
         for item in forecastViewItems {
-            let tag = item.tag
+            let tag = item.tag + 1
             if let data = forecastData.getForecastItem(forIndex: tag) {
                 item.data = data
             }
@@ -122,20 +127,12 @@ class ViewController: UIViewController, WeatherLocationDelegate {
     {
         print("update location")
         
-        /*
-         let url = "https://maps.googleapis.com/maps/api/place/autocomplete/json"
-         Alamofire.request(.GET, url, parameters: ["input":"los angeles ca", "type":"geocode", "key":GOOGLE_API_KEY]).responseJSON { (response) in
-         print(response.result.value)
-         }
-         
-         let url = "https://maps.googleapis.com/maps/api/place/details/json"
-         Alamofire.request(.GET, url, parameters: ["placeid": "", "key":GOOGLE_API_KEY]).responseJSON { (response) in
-         print(response.result.value)
-         }
-         */
-        //return
-        
-        let locPoint = ["lat": newLocation.coordinate.latitude, "lng": newLocation.coordinate.longitude]
+        fetchWeatherData(forLat: newLocation.coordinate.latitude, forLong: newLocation.coordinate.longitude)
+    }
+    
+    func fetchWeatherData(forLat lat: Double, forLong lng:Double)
+    {
+        let locPoint = ["lat": lat, "lng": lng]
         
         currentConditions.requestCurrentConditions(forLocation: locPoint, complete: { (error) in
             guard error.errorCondition == nil else {

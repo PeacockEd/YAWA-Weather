@@ -11,14 +11,12 @@ import Alamofire
 
 class ForecastData {
     
-    // by zip
-    // http://api.openweathermap.org/data/2.5/forecast?zip=94102,us&APPID=
-    
     private var items:[ForecastDayItem]!
+    
     
     init()
     {
-        items = [ForecastDayItem](count: TOTAL_FORECAST_ITEMS, repeatedValue: ForecastDayItem())
+        items = [ForecastDayItem](count: TOTAL_FORECAST_ITEMS + 1, repeatedValue: ForecastDayItem())
     }
     
     func getForecastItem(forIndex index:Int) -> ForecastDayItem?
@@ -40,8 +38,6 @@ class ForecastData {
         let url = NSURL(string: weatherUrl)!
         
         Alamofire.request(.GET, url).responseJSON { response in
-            print(response.result.debugDescription)
-            
             guard let result = response.result.value else {
                 let err:DataError = .ServerError("Unexpected Response.")
                 complete(err)
@@ -53,6 +49,39 @@ class ForecastData {
                     complete(err)
                     return
             }
+            guard let list = dict["list"] as? [Dictionary<String, AnyObject>] where list.count > 0 else {
+                let err:DataError = .FormatError("No forecast items returned from request.")
+                complete(err)
+                return
+            }
+            
+            var dataItems = [ForecastDayItem]()
+            for item in list {
+                let dayItem = ForecastDayItem()
+                guard let time = item["dt"] as? Double,
+                    let weather = item["weather"] as? [Dictionary<String, AnyObject>] where weather.count > 0,
+                    let temp = item["temp"] as? Dictionary<String, AnyObject> else {
+                        let err:DataError = .FormatError("Data response in invalid format.")
+                        complete(err)
+                        return
+                }
+                guard let imageId = weather[0]["icon"] as? String,
+                    let min = temp["min"] as? Double,
+                    let max = temp["max"] as? Double else {
+                        let err:DataError = .FormatError("Data response in invalid format.")
+                        complete(err)
+                        return
+                }
+                
+                dayItem.conditionsImageId = imageId
+                dayItem.temperatureMin = min
+                dayItem.temperatureMax = max
+                dayItem.forecastTimestamp = time
+                dataItems.append(dayItem)
+            }
+            dataItems.sortInPlace { $0.forecastTimestamp < $1.forecastTimestamp }
+            self.items = dataItems
+            
             complete(DataError.None)
         }
     }

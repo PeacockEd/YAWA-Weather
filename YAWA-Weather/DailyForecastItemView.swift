@@ -29,7 +29,7 @@ class DailyForecastItemView: UIView {
     private func updateUI()
     {
         if let data = self.data {
-            img.image = UIImage(named: "\(data.conditionsImageId)")
+            img.image = UIImage(named: "\(data.conditionsImageId).png")
             dayLbl.text = data.dayName
             forecastLbl.text = data.temperatureInfo
         }

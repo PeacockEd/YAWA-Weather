@@ -20,11 +20,11 @@ class WeatherDetailsView: UIView {
     @IBOutlet weak var windLabel:UILabel!
     
     func updateUI(withCurrentConditions data:CurrentConditions,
-                                        withForecastData forecastData:ForecastData)
+                                        withForecastData forecastData:ForecastDayItem)
     {
         todayImg.image = UIImage(named: "\(data.conditionsImageId).png")
         todayDescLabel.text = data.currentConditionsDesc
-        todayTempLabel.text = data.currentTemp
+        todayTempLabel.text = "Current: \(data.currentTemp)   Lo: \(forecastData.forecastMinTemp)  Hi: \(forecastData.forecastMaxTemp)"
         
         sunriseLabel.text = data.sunriseTime
         sunsetLabel.text = data.sunsetTime
