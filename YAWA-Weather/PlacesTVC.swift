@@ -9,10 +9,16 @@
 import Foundation
 import UIKit
 
+protocol PlacesDelegate: class {
+    func userDidSelectPlace(placeLabel label:String, placeId id:String)
+}
+
 class PlacesTVC: NSObject, UITableViewDelegate, UITableViewDataSource {
     
     private var placesTV:UITableView!
     private var _places = [Dictionary<String, String>]()
+    
+    weak var delegate:PlacesDelegate?
     
     
     init (tableViewTarget tv:UITableView)
@@ -43,6 +49,14 @@ class PlacesTVC: NSObject, UITableViewDelegate, UITableViewDataSource {
             return cell
         } else {
             return PlacesTableViewCell()
+        }
+    }
+    
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        print(places[indexPath.row].debugDescription)
+        if let placeId = places[indexPath.row]["data"],
+            let placeLabel = places[indexPath.row]["label"] {
+            delegate?.userDidSelectPlace(placeLabel: placeLabel, placeId: placeId)
         }
     }
     

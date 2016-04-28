@@ -35,10 +35,6 @@ class DailyForecastItemView: UIView {
         }
     }
     
-    override func awakeFromNib() {
-        print("I am a DAY view!!")
-    }
-    
     /*
     // Only override drawRect: if you perform custom drawing.
     // An empty implementation adversely affects performance during animation.

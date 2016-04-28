@@ -44,6 +44,7 @@ class ViewController: UIViewController
         
         suggestionsView.hidden = true
         placesController = PlacesTVC(tableViewTarget: placesTV)
+        placesController.delegate = self
         
         segmentBar.addTarget(self, action: #selector(ViewController.toggleView(_:)), forControlEvents: .ValueChanged)
         
@@ -67,7 +68,7 @@ class ViewController: UIViewController
     override func viewDidLayoutSubviews()
     {
         if firstView {
-            scrollView.contentOffset.y = searchBar.bounds.size.height
+            updateScrollPosition()
             firstView = false
         }
     }
@@ -83,6 +84,11 @@ class ViewController: UIViewController
                 item.data = data
             }
         }
+    }
+    
+    func updateScrollPosition()
+    {
+        scrollView.contentOffset.y = searchBar.bounds.size.height
     }
     
     func updateViewHeightForDevice()
@@ -147,6 +153,22 @@ class ViewController: UIViewController
         })
     }
     
+    func getGeoDetails(forPlaceId id:String)
+    {
+        PlacesManager.getGeoDetails(forPlaceId: id) { (response) in
+            guard response.error == nil else {
+                // TODO: Handle error somehow
+                print(response.error!)
+                return
+            }
+            if let result = response.value,
+                let lat = result["lat"],
+                let lng = result["lng"] {
+                self.fetchWeatherData(forLat: lat, forLong: lng)
+            }
+        }
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -155,16 +177,14 @@ class ViewController: UIViewController
 
 extension ViewController: WeatherLocationDelegate
 {
+    func didUpdateToLocation(newLocation: CLLocation)
+    {        
+        fetchWeatherData(forLat: newLocation.coordinate.latitude, forLong: newLocation.coordinate.longitude)
+    }
+    
     func locationDidFailWithError(error: NSError?, message: LocationDetailsErrorMessage)
     {
         showErrorPrompt(message.rawValue)
-    }
-    
-    func didUpdateToLocation(newLocation: CLLocation)
-    {
-        print("update location")
-        
-        //fetchWeatherData(forLat: newLocation.coordinate.latitude, forLong: newLocation.coordinate.longitude)
     }
 }
 
@@ -190,5 +210,21 @@ extension ViewController: UISearchBarDelegate
                 }
             }
         }
+    }
+}
+
+extension ViewController: PlacesDelegate
+{
+    func userDidSelectPlace(placeLabel label: String, placeId id: String)
+    {
+        searchBar.text = ""
+        placesController.places = []
+        suggestionsView.hidden = true
+        scrollView.scrollEnabled = true
+        
+        updateScrollPosition()
+        view.endEditing(true)
+        
+        getGeoDetails(forPlaceId: id)
     }
 }
