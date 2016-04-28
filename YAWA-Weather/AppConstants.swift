@@ -22,7 +22,7 @@ let TOTAL_FORECAST_ITEMS = 3
 let DEGREES_SYMBOL = "°"
 
 typealias SuggestionResponse = [Dictionary<String, String>]
-typealias GeoDetailsResponse = [Dictionary<String, Double>]
+typealias GeoDetailsResponse = Dictionary<String, Double>
 typealias DownloadComplete = (DataError) -> ()
 typealias SuggestionsDownloadComplete = (PlacesResult<SuggestionResponse, DataError>) -> ()
 typealias GeoDetailsDownloadComplete = (PlacesResult<GeoDetailsResponse, DataError>) -> ()
