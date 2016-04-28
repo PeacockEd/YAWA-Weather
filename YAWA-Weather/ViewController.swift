@@ -10,14 +10,16 @@ import UIKit
 import MapKit
 
 
-class ViewController: UIViewController, WeatherLocationDelegate {
-    
+class ViewController: UIViewController
+{
     private enum WeatherViewState: Int
     {
         case Current = 0, Details
     }
     
     @IBOutlet weak var searchBar:UISearchBar!
+    @IBOutlet weak var suggestionsView: UIView!
+    @IBOutlet weak var placesTV:UITableView!
     @IBOutlet weak var segmentBar:UISegmentedControl!
     @IBOutlet weak var currentWeatherView:CurrentWeatherView!
     @IBOutlet weak var scrollView:UIScrollView!
@@ -31,6 +33,7 @@ class ViewController: UIViewController, WeatherLocationDelegate {
     private var forecastData = ForecastData()
     
     let locationManager = LocationManager()
+    private var placesController:PlacesTVC!
     
     private var firstView = true
     
@@ -39,7 +42,12 @@ class ViewController: UIViewController, WeatherLocationDelegate {
     {
         super.viewDidLoad()
         
+        suggestionsView.hidden = true
+        placesController = PlacesTVC(tableViewTarget: placesTV)
+        
         segmentBar.addTarget(self, action: #selector(ViewController.toggleView(_:)), forControlEvents: .ValueChanged)
+        
+        searchBar.delegate = self
         
         detailsView.hidden = true
         updateViewHeightForDevice()
@@ -118,18 +126,6 @@ class ViewController: UIViewController, WeatherLocationDelegate {
         }
     }
     
-    func locationDidFailWithError(error: NSError?, message: LocationDetailsErrorMessage)
-    {
-        showErrorPrompt(message.rawValue)
-    }
-    
-    func didUpdateToLocation(newLocation: CLLocation)
-    {
-        print("update location")
-        
-        fetchWeatherData(forLat: newLocation.coordinate.latitude, forLong: newLocation.coordinate.longitude)
-    }
-    
     func fetchWeatherData(forLat lat: Double, forLong lng:Double)
     {
         let locPoint = ["lat": lat, "lng": lng]
@@ -157,3 +153,42 @@ class ViewController: UIViewController, WeatherLocationDelegate {
     }
 }
 
+extension ViewController: WeatherLocationDelegate
+{
+    func locationDidFailWithError(error: NSError?, message: LocationDetailsErrorMessage)
+    {
+        showErrorPrompt(message.rawValue)
+    }
+    
+    func didUpdateToLocation(newLocation: CLLocation)
+    {
+        print("update location")
+        
+        //fetchWeatherData(forLat: newLocation.coordinate.latitude, forLong: newLocation.coordinate.longitude)
+    }
+}
+
+extension ViewController: UISearchBarDelegate
+{
+    func searchBar(searchBar: UISearchBar, textDidChange searchText: String)
+    {
+        if searchText.isEmpty {
+            placesController.places = []
+            suggestionsView.hidden = true
+            scrollView.scrollEnabled = true
+        } else {
+            PlacesManager.getPlaceSuggestions(forInput: searchText) { (result) in
+                guard result.error == nil else {
+                    // TODO: Handle error condition
+                    print(result.error?.errorCondition!)
+                    return
+                }
+                if let places = result.value {
+                    self.suggestionsView.hidden = false
+                    self.scrollView.scrollEnabled = false
+                    self.placesController.places = places
+                }
+            }
+        }
+    }
+}
