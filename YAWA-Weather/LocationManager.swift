@@ -76,4 +76,9 @@ class LocationManager: NSObject, CLLocationManagerDelegate {
         }
         */
     }
+    
+    deinit
+    {
+        locationManager.stopUpdatingLocation()
+    }
 }
