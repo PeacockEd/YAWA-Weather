@@ -57,6 +57,9 @@ class ViewController: UIViewController
         
         locationManager.delegate = self
         locationManager.getLocation()
+        
+        let touch = UITapGestureRecognizer(target: self, action: #selector(ViewController.onTouchRecognized))
+        scrollView.addGestureRecognizer(touch)
     }
     
     override func viewDidAppear(animated: Bool)
@@ -185,9 +188,14 @@ class ViewController: UIViewController
         }
     }
     
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?)
+    {
+        view.endEditing(true)
+    }
+    
+    func onTouchRecognized()
+    {
+        view.endEditing(true)
     }
 }
 
