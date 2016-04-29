@@ -11,14 +11,13 @@ import Alamofire
 
 class PlacesManager {
     
-    static func getPlaceSuggestions(forInput input:String, complete:SuggestionsDownloadComplete)
+    class func getPlaceSuggestions(forInput input:String, complete:SuggestionsDownloadComplete)
     {
-        let url = "https://maps.googleapis.com/maps/api/place/autocomplete/json"
         var placesArray = [[String:String]]()
         
         // the "types" option set to "('cities')" restricts the response to just cities
         // instead of returning addresses
-        Alamofire.request(.GET, url, parameters: ["input":"\(input)", "types":"(cities)", "components":"country:us","key":GOOGLE_API_KEY]).responseJSON { (response) in
+        Alamofire.request(.GET, GOOGLE_PLACES_AUTOCOMPLETE_URL, parameters: ["input":"\(input)", "types":"(cities)", "components":"country:us","key":GOOGLE_API_KEY]).responseJSON { (response) in
             guard let places = response.result.value else {
                 complete(PlacesResult.Failure(DataError.ServerError("Unable to get places suggestions at this time.")))
                 return
@@ -39,12 +38,11 @@ class PlacesManager {
         }
     }
     
-    static func getGeoDetails(forPlaceId id:String, complete:GeoDetailsDownloadComplete)
+    class func getGeoDetails(forPlaceId id:String, complete:GeoDetailsDownloadComplete)
     {
-        let url = "https://maps.googleapis.com/maps/api/place/details/json"
         var geoArray = ["lat": 0.0, "lng": 0.0]
         
-        Alamofire.request(.GET, url, parameters: ["placeid": "\(id)", "key":GOOGLE_API_KEY]).responseJSON { (response) in
+        Alamofire.request(.GET, GOOGLE_PLACES_DETAILS_URL, parameters: ["placeid": "\(id)", "key":GOOGLE_API_KEY]).responseJSON { (response) in
             guard let place = response.result.value else {
                 complete(PlacesResult.Failure(DataError.ServerError("Unable to retrieve places info for id:\(id)")))
                 return

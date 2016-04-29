@@ -117,13 +117,17 @@ class ViewController: UIViewController
         }
     }
     
-    func showErrorPrompt(message: String)
+    func showErrorPrompt(message: String, okAction: ((_:UIAlertAction) -> ())?)
     {
         if !isErrorDialogOpen {
             let alertController = UIAlertController(title: "Application Error", message: message, preferredStyle: .Alert)
             
             let okAction = UIAlertAction(title: "OK", style: .Default) { (action) in
                 self.isErrorDialogOpen = false
+                
+                if let okAction = okAction {
+                    okAction(action)
+                }
             }
             alertController.addAction(okAction)
             
@@ -134,23 +138,35 @@ class ViewController: UIViewController
     
     func fetchWeatherData(forLat lat: Double, forLong lng:Double)
     {
-        let locPoint = ["lat": lat, "lng": lng]
-        
-        currentConditions.requestCurrentConditions(forLocation: locPoint, complete: { (error) in
-            guard error.errorCondition == nil else {
-                // TODO: Handle error someway/somehow
-                print("error!! \(error.errorCondition!)")
-                return
-            }
-            self.forecastData.requestForecastData(forLocation: locPoint, complete: { (error) in
+        if ConnectionManager.isConnectedToNetwork() {
+            let locPoint = ["lat": lat, "lng": lng]
+            
+            currentConditions.requestCurrentConditions(forLocation: locPoint, complete: { (error) in
                 guard error.errorCondition == nil else {
                     // TODO: Handle error someway/somehow
-                    print("error 2!! \(error.errorCondition!)")
+                    print("error!! \(error.errorCondition!)")
                     return
                 }
-                self.updateUI()
+                self.forecastData.requestForecastData(forLocation: locPoint, complete: { (error) in
+                    guard error.errorCondition == nil else {
+                        // TODO: Handle error someway/somehow
+                        print("error 2!! \(error.errorCondition!)")
+                        return
+                    }
+                    self.updateUI()
+                })
             })
-        })
+        } else {
+            showErrorPrompt(CONNECTION_NOT_AVAIL_MSG, okAction: nil)
+        }
+    }
+    
+    func dismissLocationWarning(action:UIAlertAction)
+    {
+        if let lat = DEFAULT_LOCATION["lat"],
+            let lng = DEFAULT_LOCATION["lng"] {
+            fetchWeatherData(forLat: lat, forLong: lng)
+        }
     }
     
     func getGeoDetails(forPlaceId id:String)
@@ -178,13 +194,13 @@ class ViewController: UIViewController
 extension ViewController: WeatherLocationDelegate
 {
     func didUpdateToLocation(newLocation: CLLocation)
-    {        
+    {
         fetchWeatherData(forLat: newLocation.coordinate.latitude, forLong: newLocation.coordinate.longitude)
     }
     
     func locationDidFailWithError(error: NSError?, message: LocationDetailsErrorMessage)
     {
-        showErrorPrompt(message.rawValue)
+        showErrorPrompt(message.rawValue, okAction: dismissLocationWarning)
     }
 }
 
@@ -197,16 +213,18 @@ extension ViewController: UISearchBarDelegate
             suggestionsView.hidden = true
             scrollView.scrollEnabled = true
         } else {
-            PlacesManager.getPlaceSuggestions(forInput: searchText) { (result) in
-                guard result.error == nil else {
-                    // TODO: Handle error condition
-                    print(result.error?.errorCondition!)
-                    return
-                }
-                if let places = result.value {
-                    self.suggestionsView.hidden = false
-                    self.scrollView.scrollEnabled = false
-                    self.placesController.places = places
+            if ConnectionManager.isConnectedToNetwork() {
+                PlacesManager.getPlaceSuggestions(forInput: searchText) { (result) in
+                    guard result.error == nil else {
+                        // TODO: Handle error condition
+                        print(result.error?.errorCondition!)
+                        return
+                    }
+                    if let places = result.value {
+                        self.suggestionsView.hidden = false
+                        self.scrollView.scrollEnabled = false
+                        self.placesController.places = places
+                    }
                 }
             }
         }
@@ -217,14 +235,16 @@ extension ViewController: PlacesDelegate
 {
     func userDidSelectPlace(placeLabel label: String, placeId id: String)
     {
-        searchBar.text = ""
-        placesController.places = []
-        suggestionsView.hidden = true
-        scrollView.scrollEnabled = true
-        
-        updateScrollPosition()
-        view.endEditing(true)
-        
-        getGeoDetails(forPlaceId: id)
+        if ConnectionManager.isConnectedToNetwork() {
+            searchBar.text = ""
+            placesController.places = []
+            suggestionsView.hidden = true
+            scrollView.scrollEnabled = true
+            
+            updateScrollPosition()
+            view.endEditing(true)
+            
+            getGeoDetails(forPlaceId: id)
+        }
     }
 }

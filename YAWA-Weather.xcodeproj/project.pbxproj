@@ -16,6 +16,7 @@
 		507DA4001CCECF03006E1B6A /* PlacesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 507DA3FF1CCECF03006E1B6A /* PlacesTableViewCell.swift */; };
 		50A420EE1CCD3B7900CBC292 /* PlacesManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50A420ED1CCD3B7900CBC292 /* PlacesManager.swift */; };
 		50A420F01CCD3E8600CBC292 /* PlacesResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50A420EF1CCD3E8600CBC292 /* PlacesResult.swift */; };
+		50D62EA11CD3AC8400A04701 /* ConnectionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50D62EA01CD3AC8400A04701 /* ConnectionManager.swift */; };
 		50D6E64D1CAC2F8900B02AEF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50D6E64C1CAC2F8900B02AEF /* AppDelegate.swift */; };
 		50D6E64F1CAC2F8900B02AEF /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50D6E64E1CAC2F8900B02AEF /* ViewController.swift */; };
 		50D6E6521CAC2F8900B02AEF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 50D6E6501CAC2F8900B02AEF /* Main.storyboard */; };
@@ -38,6 +39,7 @@
 		507DA3FF1CCECF03006E1B6A /* PlacesTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlacesTableViewCell.swift; sourceTree = "<group>"; };
 		50A420ED1CCD3B7900CBC292 /* PlacesManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlacesManager.swift; sourceTree = "<group>"; };
 		50A420EF1CCD3E8600CBC292 /* PlacesResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlacesResult.swift; sourceTree = "<group>"; };
+		50D62EA01CD3AC8400A04701 /* ConnectionManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConnectionManager.swift; sourceTree = "<group>"; };
 		50D6E6491CAC2F8900B02AEF /* YAWA-Weather.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "YAWA-Weather.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		50D6E64C1CAC2F8900B02AEF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		50D6E64E1CAC2F8900B02AEF /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -149,6 +151,7 @@
 				50E69CF41CBE91D300BAE670 /* AppConstants.swift */,
 				50E69CFA1CC0505200BAE670 /* LocationManager.swift */,
 				50E69CFE1CC1735000BAE670 /* AppUtils.swift */,
+				50D62EA01CD3AC8400A04701 /* ConnectionManager.swift */,
 			);
 			name = Utils;
 			sourceTree = "<group>";
@@ -197,6 +200,7 @@
 				TargetAttributes = {
 					50D6E6481CAC2F8900B02AEF = {
 						CreatedOnToolsVersion = 7.2.1;
+						DevelopmentTeam = 9YUDP5HGYU;
 					};
 				};
 			};
@@ -296,6 +300,7 @@
 				50E69CFD1CC1536100BAE670 /* ForecastData.swift in Sources */,
 				507DA3FE1CCECA40006E1B6A /* PlacesTVC.swift in Sources */,
 				50D6E64D1CAC2F8900B02AEF /* AppDelegate.swift in Sources */,
+				50D62EA11CD3AC8400A04701 /* ConnectionManager.swift in Sources */,
 				502AA79D1CB9847400FDC05A /* WeatherDetailsView.swift in Sources */,
 				50E69CF71CBE929B00BAE670 /* CurrentConditions.swift in Sources */,
 				50E69CFB1CC0505200BAE670 /* LocationManager.swift in Sources */,
@@ -413,10 +418,13 @@
 			baseConfigurationReference = 6485E2D20F60BA9FCD6BA9D7 /* Pods-YAWA-Weather.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = "YAWA-Weather/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.epk.devslopes.YAWA-Weather";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
 		};
@@ -425,10 +433,13 @@
 			baseConfigurationReference = C2C8F24DE60F21AD80F6A333 /* Pods-YAWA-Weather.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = "YAWA-Weather/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.epk.devslopes.YAWA-Weather";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
 		};
