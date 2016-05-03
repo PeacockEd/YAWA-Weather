@@ -17,6 +17,7 @@ class ViewController: UIViewController
         case Current = 0, Details
     }
     
+    @IBOutlet weak var refreshBtn:UIButton!
     @IBOutlet weak var searchBar:UISearchBar!
     @IBOutlet weak var suggestionsView: UIView!
     @IBOutlet weak var placesTV:UITableView!
@@ -49,7 +50,9 @@ class ViewController: UIViewController
         segmentBar.addTarget(self, action: #selector(ViewController.toggleView(_:)), forControlEvents: .ValueChanged)
         
         searchBar.delegate = self
+        scrollView.delegate = self
         
+        refreshBtn.enabled = false
         detailsView.hidden = true
         updateViewHeightForDevice()
         
@@ -71,9 +74,14 @@ class ViewController: UIViewController
     override func viewDidLayoutSubviews()
     {
         if firstView {
-            updateScrollPosition()
+            updateScrollYPosition(newY: searchBar.bounds.size.height, withAnimation: false)
             firstView = false
         }
+    }
+    
+    @IBAction func onTapRefresh(sender:UIButton)
+    {
+        
     }
     
     private func updateUI()
@@ -89,9 +97,9 @@ class ViewController: UIViewController
         }
     }
     
-    func updateScrollPosition()
+    func updateScrollYPosition(newY y:CGFloat, withAnimation animated:Bool)
     {
-        scrollView.contentOffset.y = searchBar.bounds.size.height
+        scrollView.setContentOffset(CGPointMake(0.0, y), animated: animated)
     }
     
     func updateViewHeightForDevice()
@@ -212,6 +220,18 @@ extension ViewController: WeatherLocationDelegate
     }
 }
 
+extension ViewController: UIScrollViewDelegate
+{
+    func scrollViewDidEndDragging(scrollView: UIScrollView, willDecelerate decelerate: Bool)
+    {
+        let offset = scrollView.contentOffset.y
+        
+        if offset > 0 && offset < searchBar.bounds.size.height {
+            updateScrollYPosition(newY: 0.0, withAnimation: true)
+        }
+    }
+}
+
 extension ViewController: UISearchBarDelegate
 {
     func searchBar(searchBar: UISearchBar, textDidChange searchText: String)
@@ -249,7 +269,7 @@ extension ViewController: PlacesDelegate
             suggestionsView.hidden = true
             scrollView.scrollEnabled = true
             
-            updateScrollPosition()
+            updateScrollYPosition(newY: searchBar.bounds.size.height, withAnimation: false)
             view.endEditing(true)
             
             getGeoDetails(forPlaceId: id)
