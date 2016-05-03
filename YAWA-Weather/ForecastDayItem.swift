@@ -34,7 +34,7 @@ class ForecastDayItem {
     
     var temperatureInfo:String {
         get {
-            return "\(Int(_temperatureMin))\(DEGREES_SYMBOL)/\(Int(_temperatureMax))\(DEGREES_SYMBOL)"
+            return "\(Int(_temperatureMax))\(DEGREES_SYMBOL)/\(Int(_temperatureMin))\(DEGREES_SYMBOL)"
         }
     }
     

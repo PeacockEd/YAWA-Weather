@@ -23,7 +23,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Atu-FT-4xj">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="49"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Local Weather" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ufY-yL-HWl">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Local Weather" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ufY-yL-HWl">
                                         <rect key="frame" x="110" y="22" width="380" height="20"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="380" id="koD-Py-wf4"/>
@@ -32,11 +32,24 @@
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TsW-0x-fTB">
+                                        <rect key="frame" x="565" y="24" width="20" height="20"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="20" id="3ib-pT-7lP"/>
+                                            <constraint firstAttribute="width" constant="20" id="x0R-Kp-15S"/>
+                                        </constraints>
+                                        <state key="normal" image="reload"/>
+                                        <connections>
+                                            <action selector="onTapRefresh:" destination="BYZ-38-t0r" eventType="touchUpInside" id="xs7-RW-VRb"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" red="0.40000000600000002" green="0.80000001190000003" blue="1" alpha="0.59999999999999998" colorSpace="calibratedRGB"/>
                                 <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="TsW-0x-fTB" secondAttribute="trailing" constant="15" id="9bK-yJ-Dbu"/>
                                     <constraint firstAttribute="height" constant="49" id="F1M-lN-9xH"/>
                                     <constraint firstItem="ufY-yL-HWl" firstAttribute="centerX" secondItem="Atu-FT-4xj" secondAttribute="centerX" id="OjU-iW-O6K"/>
+                                    <constraint firstAttribute="bottom" secondItem="TsW-0x-fTB" secondAttribute="bottom" constant="5" id="c3E-FN-HLT"/>
                                     <constraint firstAttribute="bottom" secondItem="ufY-yL-HWl" secondAttribute="bottom" constant="7" id="hJC-Qh-YTG"/>
                                 </constraints>
                             </view>
@@ -277,11 +290,11 @@
                                                                 <rect key="frame" x="0.0" y="28" width="600" height="40"/>
                                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="s5I-G0-mDt" id="tWD-Ea-vPN">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="600" height="39.5"/>
+                                                                    <rect key="frame" x="0.0" y="0.0" width="600" height="39"/>
                                                                     <autoresizingMask key="autoresizingMask"/>
                                                                     <subviews>
-                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="City, State" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AnG-de-0Fv">
-                                                                            <rect key="frame" x="17" y="14.5" width="570" height="21"/>
+                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="City, State" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AnG-de-0Fv">
+                                                                            <rect key="frame" x="17" y="15" width="570" height="21"/>
                                                                             <constraints>
                                                                                 <constraint firstAttribute="height" constant="21" id="dJl-tZ-T2s"/>
                                                                             </constraints>
@@ -348,7 +361,7 @@
                                                 <rect key="frame" x="0.0" y="0.0" width="187" height="243"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalCompressionResistancePriority="751" misplaced="YES" text="SUN" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DPW-W7-ReB">
-                                                        <rect key="frame" x="71" y="0.0" width="45" height="134"/>
+                                                        <rect key="frame" x="71" y="0.0" width="45" height="133"/>
                                                         <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="21"/>
                                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                         <nil key="highlightedColor"/>
@@ -357,7 +370,7 @@
                                                         </variation>
                                                     </label>
                                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="11n" translatesAutoresizingMaskIntoConstraints="NO" id="g90-yO-Eti">
-                                                        <rect key="frame" x="56" y="134" width="75" height="83"/>
+                                                        <rect key="frame" x="56" y="133" width="75" height="83"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" secondItem="g90-yO-Eti" secondAttribute="height" multiplier="28:31" id="KmK-8D-PmK"/>
                                                         </constraints>
@@ -366,7 +379,7 @@
                                                         </variation>
                                                     </imageView>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="48°/59°" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wre-Il-dTC">
-                                                        <rect key="frame" x="56" y="217" width="75" height="27"/>
+                                                        <rect key="frame" x="56" y="216" width="75" height="27"/>
                                                         <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="22"/>
                                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                         <nil key="highlightedColor"/>
@@ -393,13 +406,13 @@
                                         </connections>
                                     </view>
                                     <view tag="1" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qAl-G0-NHd" customClass="DailyForecastItemView" customModule="YAWA_Weather" customModuleProvider="target">
-                                        <rect key="frame" x="187" y="0.0" width="187" height="243"/>
+                                        <rect key="frame" x="187" y="0.0" width="186" height="243"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" misplaced="YES" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="0iD-4a-N7t">
-                                                <rect key="frame" x="0.0" y="0.0" width="187" height="243"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="186" height="243"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="MON" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bVl-da-9qb">
-                                                        <rect key="frame" x="68" y="0.0" width="51" height="133"/>
+                                                        <rect key="frame" x="68" y="0.0" width="51" height="134"/>
                                                         <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="21"/>
                                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                         <nil key="highlightedColor"/>
@@ -408,7 +421,7 @@
                                                         </variation>
                                                     </label>
                                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="11n" translatesAutoresizingMaskIntoConstraints="NO" id="g7t-fM-wpJ">
-                                                        <rect key="frame" x="56" y="133" width="75" height="84"/>
+                                                        <rect key="frame" x="56" y="134" width="74" height="82"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" secondItem="g7t-fM-wpJ" secondAttribute="height" multiplier="28:31" id="NdS-r2-onq"/>
                                                         </constraints>
@@ -417,7 +430,7 @@
                                                         </variation>
                                                     </imageView>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" misplaced="YES" text="48°/59°" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0Gm-61-IRI">
-                                                        <rect key="frame" x="56" y="217" width="75" height="27"/>
+                                                        <rect key="frame" x="56" y="216" width="75" height="27"/>
                                                         <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="22"/>
                                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                         <nil key="highlightedColor"/>
@@ -444,13 +457,13 @@
                                         </connections>
                                     </view>
                                     <view tag="2" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6dt-DP-53X" customClass="DailyForecastItemView" customModule="YAWA_Weather" customModuleProvider="target">
-                                        <rect key="frame" x="374" y="10" width="187" height="224"/>
+                                        <rect key="frame" x="373" y="10" width="187" height="224"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" misplaced="YES" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="Dwx-PB-Pjf">
                                                 <rect key="frame" x="0.0" y="0.0" width="187" height="224"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="249" verticalCompressionResistancePriority="751" misplaced="YES" text="TUE" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="47t-dX-TgP">
-                                                        <rect key="frame" x="72" y="0.0" width="42" height="115"/>
+                                                        <rect key="frame" x="73" y="0.0" width="42" height="114"/>
                                                         <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="21"/>
                                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                         <nil key="highlightedColor"/>
@@ -459,7 +472,7 @@
                                                         </variation>
                                                     </label>
                                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" misplaced="YES" image="11n" translatesAutoresizingMaskIntoConstraints="NO" id="N05-u9-Wvw">
-                                                        <rect key="frame" x="56" y="115" width="75" height="83"/>
+                                                        <rect key="frame" x="56" y="114" width="75" height="83"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" secondItem="N05-u9-Wvw" secondAttribute="height" multiplier="28:31" id="Lqc-PH-rgx"/>
                                                         </constraints>
@@ -468,7 +481,7 @@
                                                         </variation>
                                                     </imageView>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="48°/59°" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wZb-zX-o23">
-                                                        <rect key="frame" x="56" y="198" width="75" height="27"/>
+                                                        <rect key="frame" x="56" y="197" width="75" height="27"/>
                                                         <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="22"/>
                                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                         <nil key="highlightedColor"/>
@@ -523,6 +536,7 @@
                         <outlet property="currentWeatherView" destination="sFy-BP-e9N" id="JOX-Kq-fYu"/>
                         <outlet property="detailsView" destination="qEm-S6-V9u" id="yN5-c6-5vH"/>
                         <outlet property="placesTV" destination="b7j-Ts-p60" id="Er2-86-AZn"/>
+                        <outlet property="refreshBtn" destination="TsW-0x-fTB" id="TLE-Z3-Crv"/>
                         <outlet property="scrollView" destination="E1l-Fp-lxh" id="PF2-dN-XNt"/>
                         <outlet property="scrollingContainerHeightConstraint" destination="cKU-oA-DuV" id="MUd-Wt-8J1"/>
                         <outlet property="searchBar" destination="zFU-x1-4Ci" id="bnr-xF-nym"/>
@@ -541,6 +555,7 @@
     <resources>
         <image name="11d" width="171" height="171"/>
         <image name="11n" width="171" height="171"/>
+        <image name="reload" width="32" height="32"/>
         <image name="sunrise" width="171" height="171"/>
         <image name="sunset" width="171" height="171"/>
         <image name="wind" width="171" height="171"/>
