@@ -61,8 +61,8 @@ class ViewController: UIViewController
         locationManager.delegate = self
         locationManager.getLocation()
         
-        let touch = UITapGestureRecognizer(target: self, action: #selector(ViewController.onTouchRecognized))
-        scrollView.addGestureRecognizer(touch)
+        let scrollViewTapGesture = UITapGestureRecognizer(target: self, action: #selector(ViewController.onTouchRecognized))
+        scrollView.addGestureRecognizer(scrollViewTapGesture)
     }
     
     override func viewDidAppear(animated: Bool)
