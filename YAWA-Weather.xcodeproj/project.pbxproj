@@ -28,6 +28,7 @@
 		50E69CFB1CC0505200BAE670 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50E69CFA1CC0505200BAE670 /* LocationManager.swift */; };
 		50E69CFD1CC1536100BAE670 /* ForecastData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50E69CFC1CC1536100BAE670 /* ForecastData.swift */; };
 		50E69CFF1CC1735000BAE670 /* AppUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50E69CFE1CC1735000BAE670 /* AppUtils.swift */; };
+		B27942CB1CDAE6AE006188A6 /* DefaultsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B27942CA1CDAE6AE006188A6 /* DefaultsManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -54,6 +55,7 @@
 		50E69CFC1CC1536100BAE670 /* ForecastData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ForecastData.swift; sourceTree = "<group>"; };
 		50E69CFE1CC1735000BAE670 /* AppUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppUtils.swift; sourceTree = "<group>"; };
 		6485E2D20F60BA9FCD6BA9D7 /* Pods-YAWA-Weather.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YAWA-Weather.debug.xcconfig"; path = "Pods/Target Support Files/Pods-YAWA-Weather/Pods-YAWA-Weather.debug.xcconfig"; sourceTree = "<group>"; };
+		B27942CA1CDAE6AE006188A6 /* DefaultsManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultsManager.swift; sourceTree = "<group>"; };
 		C2C8F24DE60F21AD80F6A333 /* Pods-YAWA-Weather.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YAWA-Weather.release.xcconfig"; path = "Pods/Target Support Files/Pods-YAWA-Weather/Pods-YAWA-Weather.release.xcconfig"; sourceTree = "<group>"; };
 		F5B69EB36EEB10AF24207078 /* Pods_YAWA_Weather.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_YAWA_Weather.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -152,6 +154,7 @@
 				50E69CFA1CC0505200BAE670 /* LocationManager.swift */,
 				50E69CFE1CC1735000BAE670 /* AppUtils.swift */,
 				50D62EA01CD3AC8400A04701 /* ConnectionManager.swift */,
+				B27942CA1CDAE6AE006188A6 /* DefaultsManager.swift */,
 			);
 			name = Utils;
 			sourceTree = "<group>";
@@ -295,6 +298,7 @@
 				50E69CF51CBE91D300BAE670 /* AppConstants.swift in Sources */,
 				50A420EE1CCD3B7900CBC292 /* PlacesManager.swift in Sources */,
 				50E69CF91CBE92C200BAE670 /* ForecastDayItem.swift in Sources */,
+				B27942CB1CDAE6AE006188A6 /* DefaultsManager.swift in Sources */,
 				5035A1261CCAB3A300ABE3F9 /* DataError.swift in Sources */,
 				50A420F01CCD3E8600CBC292 /* PlacesResult.swift in Sources */,
 				50E69CFD1CC1536100BAE670 /* ForecastData.swift in Sources */,

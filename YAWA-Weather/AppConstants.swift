@@ -17,7 +17,7 @@ let GOOGLE_PLACES_DETAILS_URL = "https://maps.googleapis.com/maps/api/place/deta
 
 // YOU MUST OBTAIN YOUR OWN API KEY!
 // SEE http://openweathermap.org/ FOR MORE INFO
-let API_KEY = ""
+let WEATHER_API_KEY = ""
 let CURRENT_WEATHER_URL = "http://api.openweathermap.org/data/2.5/weather/?units=imperial&"
 let FORECAST_WEATHER_URL = "http://api.openweathermap.org/data/2.5/forecast/daily?cnt=4&units=imperial&"
 let TOTAL_FORECAST_ITEMS = 3
@@ -26,6 +26,7 @@ let DEFAULT_LOCATION = ["lat": 40.7141667, "lng": -74.0063889] // approx NYC
 
 let CONNECTION_NOT_AVAIL_MSG = "Your device does not have an active data connection at this time. In order to retrieve weather data, please enable a network connection."
 
+typealias SavedLocation = Dictionary<String, Double>
 typealias SuggestionResponse = [Dictionary<String, String>]
 typealias GeoDetailsResponse = Dictionary<String, Double>
 typealias DownloadComplete = (DataError) -> ()

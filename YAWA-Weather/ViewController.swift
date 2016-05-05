@@ -29,6 +29,7 @@ class ViewController: UIViewController
     
     @IBOutlet weak var scrollingContainerHeightConstraint:NSLayoutConstraint!
     
+    private var scrollLastContentOffset: CGFloat = 0.0
     private var isErrorDialogOpen = false;
     private var currentConditions = CurrentConditions()
     private var forecastData = ForecastData()
@@ -58,11 +59,15 @@ class ViewController: UIViewController
         
         updateUI()
         
-        locationManager.delegate = self
-        locationManager.getLocation()
-        
         let scrollViewTapGesture = UITapGestureRecognizer(target: self, action: #selector(ViewController.onTouchRecognized))
         scrollView.addGestureRecognizer(scrollViewTapGesture)
+        
+        locationManager.delegate = self
+        if let location = DefaultsManager.getSavedLocation() {
+            fetchWeatherData(forLat: location["lat"]!, forLong: location["lng"]!)
+        } else {
+            locationManager.getLocation()
+        }
     }
     
     override func viewDidAppear(animated: Bool)
@@ -75,13 +80,18 @@ class ViewController: UIViewController
     {
         if firstView {
             updateScrollYPosition(newY: searchBar.bounds.size.height, withAnimation: false)
+            scrollLastContentOffset = scrollView.contentOffset.y
             firstView = false
         }
     }
     
     @IBAction func onTapRefresh(sender:UIButton)
     {
-        
+        if let savedLocation = locationManager.currentChosenLocation,
+            let lat = savedLocation["lat"],
+            let lng = savedLocation["lng"] {
+            fetchWeatherData(forLat: lat, forLong: lng)
+        }
     }
     
     private func updateUI()
@@ -94,6 +104,9 @@ class ViewController: UIViewController
             if let data = forecastData.getForecastItem(forIndex: tag) {
                 item.data = data
             }
+        }
+        if let _ = locationManager.currentChosenLocation {
+            refreshBtn.enabled = true
         }
     }
     
@@ -151,6 +164,7 @@ class ViewController: UIViewController
     {
         if ConnectionManager.isConnectedToNetwork() {
             let locPoint = ["lat": lat, "lng": lng]
+            DefaultsManager.saveLocation(forCoords: locPoint)
             
             currentConditions.requestCurrentConditions(forLocation: locPoint, complete: { (error) in
                 guard error.errorCondition == nil else {
@@ -164,6 +178,7 @@ class ViewController: UIViewController
                         print("error 2!! \(error.errorCondition!)")
                         return
                     }
+                    self.locationManager.currentChosenLocation = ["lat": lat, "lng": lng]
                     self.updateUI()
                 })
             })
@@ -222,13 +237,16 @@ extension ViewController: WeatherLocationDelegate
 
 extension ViewController: UIScrollViewDelegate
 {
+    
     func scrollViewDidEndDragging(scrollView: UIScrollView, willDecelerate decelerate: Bool)
     {
         let offset = scrollView.contentOffset.y
-        
-        if offset > 0 && offset < searchBar.bounds.size.height {
+        if offset < scrollLastContentOffset && offset > 0 && offset < searchBar.bounds.height {
             updateScrollYPosition(newY: 0.0, withAnimation: true)
+        } else if offset > scrollLastContentOffset && offset < searchBar.bounds.height * 1.1 {
+            updateScrollYPosition(newY: searchBar.bounds.height, withAnimation: true)
         }
+        scrollLastContentOffset = scrollView.contentOffset.y
     }
 }
 

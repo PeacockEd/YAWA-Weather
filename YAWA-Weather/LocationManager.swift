@@ -24,8 +24,19 @@ class LocationManager: NSObject, CLLocationManagerDelegate {
     weak var delegate:WeatherLocationDelegate?
     
     private let locationManager = CLLocationManager()
+    private var _currentChosenLocation: SavedLocation?
     //private var geoCoder = CLGeocoder()
     
+    
+    var currentChosenLocation:SavedLocation?
+    {
+        get {
+            return _currentChosenLocation
+        }
+        set {
+            _currentChosenLocation = newValue
+        }
+    }
     
     func getLocation()
     {
@@ -36,9 +47,7 @@ class LocationManager: NSObject, CLLocationManagerDelegate {
     
     func locationAuthStatus()
     {
-        if CLLocationManager.authorizationStatus() == .AuthorizedWhenInUse {
-            
-        } else {
+        if CLLocationManager.authorizationStatus() != .AuthorizedWhenInUse {
             locationManager.requestWhenInUseAuthorization()
         }
     }
