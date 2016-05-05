@@ -102,7 +102,7 @@ class CurrentConditions {
             return
         }
         
-        let weatherUrl = "\(CURRENT_WEATHER_URL)lat=\(lat)&lon=\(lng)&APPID=\(API_KEY)"
+        let weatherUrl = "\(CURRENT_WEATHER_URL)lat=\(lat)&lon=\(lng)&APPID=\(WEATHER_API_KEY)"
         let url = NSURL(string: weatherUrl)!
         
         Alamofire.request(.GET, url).responseJSON { response in

@@ -34,7 +34,7 @@ class ForecastData {
             return
         }
         
-        let weatherUrl = "\(FORECAST_WEATHER_URL)lon=\(lng)&lat=\(lat)&APPID=\(API_KEY)"
+        let weatherUrl = "\(FORECAST_WEATHER_URL)lon=\(lng)&lat=\(lat)&APPID=\(WEATHER_API_KEY)"
         let url = NSURL(string: weatherUrl)!
         
         Alamofire.request(.GET, url).responseJSON { response in

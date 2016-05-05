@@ -24,7 +24,7 @@ class WeatherDetailsView: UIView {
     {
         todayImg.image = UIImage(named: "\(data.conditionsImageId).png")
         todayDescLabel.text = data.currentConditionsDesc
-        todayTempLabel.text = "Current: \(data.currentTemp)   Lo: \(forecastData.forecastMinTemp)  Hi: \(forecastData.forecastMaxTemp)"
+        todayTempLabel.text = "Current: \(data.currentTemp)   Hi: \(forecastData.forecastMaxTemp)  Lo: \(forecastData.forecastMinTemp)"
         
         sunriseLabel.text = data.sunriseTime
         sunsetLabel.text = data.sunsetTime
