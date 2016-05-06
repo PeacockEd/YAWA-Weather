@@ -52,8 +52,8 @@ class PlacesTVC: NSObject, UITableViewDelegate, UITableViewDataSource {
         }
     }
     
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        print(places[indexPath.row].debugDescription)
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath)
+    {
         if let placeId = places[indexPath.row]["data"],
             let placeLabel = places[indexPath.row]["label"] {
             delegate?.userDidSelectPlace(placeLabel: placeLabel, placeId: placeId)
