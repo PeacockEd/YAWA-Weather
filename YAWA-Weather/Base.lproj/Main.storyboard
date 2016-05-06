@@ -33,10 +33,10 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TsW-0x-fTB">
-                                        <rect key="frame" x="565" y="24" width="20" height="20"/>
+                                        <rect key="frame" x="560" y="19" width="25" height="25"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="20" id="3ib-pT-7lP"/>
-                                            <constraint firstAttribute="width" constant="20" id="x0R-Kp-15S"/>
+                                            <constraint firstAttribute="height" constant="25" id="3ib-pT-7lP"/>
+                                            <constraint firstAttribute="width" constant="25" id="x0R-Kp-15S"/>
                                         </constraints>
                                         <state key="normal" image="reload"/>
                                         <connections>
