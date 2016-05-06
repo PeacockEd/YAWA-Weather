@@ -33,6 +33,7 @@ class ViewController: UIViewController
     private var isErrorDialogOpen = false;
     private var currentConditions = CurrentConditions()
     private var forecastData = ForecastData()
+    private var loadingAnimation: LoadingAnimationView?
     
     let locationManager = LocationManager()
     private var placesController:PlacesTVC!
@@ -67,6 +68,21 @@ class ViewController: UIViewController
             fetchWeatherData(forLat: location["lat"]!, forLong: location["lng"]!)
         } else {
             locationManager.getLocation()
+        }
+    }
+    
+    func showLoadingAnimation()
+    {
+        if loadingAnimation == nil {
+            loadingAnimation = LoadingAnimationView(targetView: self.view)
+        }
+    }
+    
+    func removeLoadingAnimation()
+    {
+        if let loadAnim = loadingAnimation {
+            loadAnim.removeLoadingAnimation()
+            loadingAnimation = nil
         }
     }
     
@@ -108,6 +124,8 @@ class ViewController: UIViewController
         if let _ = locationManager.currentChosenLocation {
             refreshBtn.enabled = true
         }
+        
+        removeLoadingAnimation()
     }
     
     func updateScrollYPosition(newY y:CGFloat, withAnimation animated:Bool)
@@ -163,6 +181,7 @@ class ViewController: UIViewController
     func fetchWeatherData(forLat lat: Double, forLong lng:Double)
     {
         if ConnectionManager.isConnectedToNetwork() {
+            showLoadingAnimation()
             let locPoint = ["lat": lat, "lng": lng]
             DefaultsManager.saveLocation(forCoords: locPoint)
             
