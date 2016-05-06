@@ -25,6 +25,7 @@ let DEGREES_SYMBOL = "°"
 let DEFAULT_LOCATION = ["lat": 40.7141667, "lng": -74.0063889] // approx NYC
 
 let CONNECTION_NOT_AVAIL_MSG = "Your device does not have an active data connection at this time. In order to retrieve weather data, please enable a network connection."
+let DATA_ERROR = "Unable to retrieve weather information. Try again later."
 
 typealias SavedLocation = Dictionary<String, Double>
 typealias SuggestionResponse = [Dictionary<String, String>]

@@ -29,7 +29,7 @@ class ViewController: UIViewController
     
     @IBOutlet weak var scrollingContainerHeightConstraint:NSLayoutConstraint!
     
-    private var scrollLastContentOffset: CGFloat = 0.0
+    private var scrollLastContentOffset: CGFloat = 0
     private var isErrorDialogOpen = false;
     private var currentConditions = CurrentConditions()
     private var forecastData = ForecastData()
@@ -187,14 +187,14 @@ class ViewController: UIViewController
             
             currentConditions.requestCurrentConditions(forLocation: locPoint, complete: { (error) in
                 guard error.errorCondition == nil else {
-                    // TODO: Handle error someway/somehow
-                    print("error!! \(error.errorCondition!)")
+                    self.showErrorPrompt(DATA_ERROR, okAction: nil)
+                    //print("error!! \(error.errorCondition!)")
                     return
                 }
                 self.forecastData.requestForecastData(forLocation: locPoint, complete: { (error) in
                     guard error.errorCondition == nil else {
-                        // TODO: Handle error someway/somehow
-                        print("error 2!! \(error.errorCondition!)")
+                        self.showErrorPrompt(DATA_ERROR, okAction: nil)
+                        //print("error 2!! \(error.errorCondition!)")
                         return
                     }
                     self.locationManager.currentChosenLocation = ["lat": lat, "lng": lng]
@@ -218,8 +218,8 @@ class ViewController: UIViewController
     {
         PlacesManager.getGeoDetails(forPlaceId: id) { (response) in
             guard response.error == nil else {
-                // TODO: Handle error somehow
-                print(response.error!)
+                self.showErrorPrompt(DATA_ERROR, okAction: nil)
+                //print(response.error!)
                 return
             }
             if let result = response.value,
@@ -281,8 +281,8 @@ extension ViewController: UISearchBarDelegate
             if ConnectionManager.isConnectedToNetwork() {
                 PlacesManager.getPlaceSuggestions(forInput: searchText) { (result) in
                     guard result.error == nil else {
-                        // TODO: Handle error condition
-                        print(result.error?.errorCondition!)
+                        self.showErrorPrompt(DATA_ERROR, okAction: nil)
+                        //print(result.error?.errorCondition!)
                         return
                     }
                     if let places = result.value {
