@@ -17,6 +17,7 @@ class ViewController: UIViewController
         case Current = 0, Details
     }
     
+    @IBOutlet weak var locationBtn:UIButton!
     @IBOutlet weak var refreshBtn:UIButton!
     @IBOutlet weak var searchBar:UISearchBar!
     @IBOutlet weak var suggestionsView: UIView!
@@ -49,7 +50,7 @@ class ViewController: UIViewController
         placesController = PlacesTVC(tableViewTarget: placesTV)
         placesController.delegate = self
         
-        segmentBar.addTarget(self, action: #selector(ViewController.toggleView(_:)), forControlEvents: .ValueChanged)
+        segmentBar.addTarget(self, action: #selector(ViewController.onToggleView(_:)), forControlEvents: .ValueChanged)
         
         searchBar.delegate = self
         scrollView.delegate = self
@@ -69,6 +70,8 @@ class ViewController: UIViewController
         } else {
             locationManager.getLocation()
         }
+        
+        locationBtn.enabled = false
     }
     
     func showLoadingAnimation()
@@ -110,6 +113,12 @@ class ViewController: UIViewController
         }
     }
     
+    @IBAction func onTapLocationBtn(sender: UIButton)
+    {
+        locationBtn.enabled = false
+        locationManager.getLocation()
+    }
+    
     private func updateUI()
     {
         currentWeatherView.updateUI(withCurrentConditions: currentConditions)
@@ -125,6 +134,13 @@ class ViewController: UIViewController
             refreshBtn.enabled = true
         }
         
+        if locationManager.authStatus {
+            locationBtn.enabled = true
+        } else {
+            locationBtn.enabled = false
+        }
+        
+        toggleView(forIndex: 0)
         removeLoadingAnimation()
     }
     
@@ -144,9 +160,14 @@ class ViewController: UIViewController
         }
     }
     
-    func toggleView(segmentControl: UISegmentedControl)
+    func onToggleView(segmentControl: UISegmentedControl)
     {
         let index = segmentControl.selectedSegmentIndex
+        toggleView(forIndex: index)
+    }
+    
+    private func toggleView(forIndex index: Int)
+    {
         if let viewToShow = WeatherViewState(rawValue: index) {
             switch viewToShow {
             case .Current:
@@ -156,6 +177,9 @@ class ViewController: UIViewController
                 currentWeatherView.hidden = true
                 detailsView.hidden = false
             }
+        }
+        if segmentBar.selectedSegmentIndex != index {
+            segmentBar.selectedSegmentIndex = index
         }
     }
     
