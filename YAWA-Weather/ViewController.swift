@@ -17,6 +17,7 @@ class ViewController: UIViewController
         case Current = 0, Details
     }
     
+    @IBOutlet weak var tutorialView:TutorialView?
     @IBOutlet weak var locationBtn:UIButton!
     @IBOutlet weak var refreshBtn:UIButton!
     @IBOutlet weak var searchBar:UISearchBar!
@@ -54,6 +55,8 @@ class ViewController: UIViewController
         
         searchBar.delegate = self
         scrollView.delegate = self
+        locationManager.delegate = self
+        tutorialView?.delegate = self
         
         refreshBtn.enabled = false
         detailsView.hidden = true
@@ -64,14 +67,37 @@ class ViewController: UIViewController
         let scrollViewTapGesture = UITapGestureRecognizer(target: self, action: #selector(ViewController.onTouchRecognized))
         scrollView.addGestureRecognizer(scrollViewTapGesture)
         
-        locationManager.delegate = self
+        if !DefaultsManager.getIsFirstLaunch() {
+            dismissTutorial()
+        } else {
+            if let tutorialView = tutorialView {
+                tutorialView.hidden = false
+                tutorialView.beginTutorial()
+            }
+        }
+        
+        locationBtn.enabled = false
+    }
+    
+    func initWeatherCall()
+    {
+        locationManager.locationAuthStatus()
+        
         if let location = DefaultsManager.getSavedLocation() {
             fetchWeatherData(forLat: location["lat"]!, forLong: location["lng"]!)
         } else {
             locationManager.getLocation()
         }
-        
-        locationBtn.enabled = false
+    }
+    
+    func dismissTutorial()
+    {
+        if let tutorialView = tutorialView {
+            tutorialView.hidden = true
+            tutorialView.removeFromSuperview()
+            self.tutorialView = nil
+        }
+        initWeatherCall()
     }
     
     func showLoadingAnimation()
@@ -87,12 +113,6 @@ class ViewController: UIViewController
             loadAnim.removeLoadingAnimation()
             loadingAnimation = nil
         }
-    }
-    
-    override func viewDidAppear(animated: Bool)
-    {
-        super.viewDidAppear(animated)
-        locationManager.locationAuthStatus()
     }
     
     override func viewDidLayoutSubviews()
@@ -335,5 +355,13 @@ extension ViewController: PlacesDelegate
             
             getGeoDetails(forPlaceId: id)
         }
+    }
+}
+
+extension ViewController: LaunchTutorialDismissedDelegate
+{
+    func didDismissLaunchTutorial()
+    {
+        dismissTutorial()
     }
 }

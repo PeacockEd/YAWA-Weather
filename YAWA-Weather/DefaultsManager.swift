@@ -10,6 +10,7 @@ import Foundation
 
 struct Defaults {
     static let SavedLocation = "savedLocation"
+    static let AppHasLaunchedBefore = "appHasLaunchedBefore"
 }
 
 class DefaultsManager {
@@ -31,5 +32,16 @@ class DefaultsManager {
             }
         }
         return nil
+    }
+    
+    static func getIsFirstLaunch() -> Bool
+    {
+        let defaults = NSUserDefaults.standardUserDefaults()
+        if defaults.boolForKey(Defaults.AppHasLaunchedBefore) {
+            return false
+        }
+        defaults.setBool(true, forKey: Defaults.AppHasLaunchedBefore)
+
+        return true
     }
 }
