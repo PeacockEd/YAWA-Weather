@@ -43,12 +43,25 @@
                                             <action selector="onTapRefresh:" destination="BYZ-38-t0r" eventType="touchUpInside" id="xs7-RW-VRb"/>
                                         </connections>
                                     </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yqK-xX-rsM">
+                                        <rect key="frame" x="15" y="24" width="20" height="20"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="20" id="91z-xl-aCs"/>
+                                            <constraint firstAttribute="width" constant="20" id="XEc-FU-sID"/>
+                                        </constraints>
+                                        <state key="normal" image="location"/>
+                                        <connections>
+                                            <action selector="onTapLocationBtn:" destination="BYZ-38-t0r" eventType="touchUpInside" id="8gI-TW-zSQ"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" red="0.40000000600000002" green="0.80000001190000003" blue="1" alpha="0.59999999999999998" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="TsW-0x-fTB" secondAttribute="trailing" constant="15" id="9bK-yJ-Dbu"/>
                                     <constraint firstAttribute="height" constant="49" id="F1M-lN-9xH"/>
+                                    <constraint firstItem="yqK-xX-rsM" firstAttribute="leading" secondItem="Atu-FT-4xj" secondAttribute="leading" constant="15" id="GK5-lC-WHR"/>
                                     <constraint firstItem="ufY-yL-HWl" firstAttribute="centerX" secondItem="Atu-FT-4xj" secondAttribute="centerX" id="OjU-iW-O6K"/>
+                                    <constraint firstAttribute="bottom" secondItem="yqK-xX-rsM" secondAttribute="bottom" constant="5" id="aW8-ii-6LY"/>
                                     <constraint firstAttribute="bottom" secondItem="TsW-0x-fTB" secondAttribute="bottom" constant="5" id="c3E-FN-HLT"/>
                                     <constraint firstAttribute="bottom" secondItem="ufY-yL-HWl" secondAttribute="bottom" constant="7" id="hJC-Qh-YTG"/>
                                 </constraints>
@@ -535,6 +548,7 @@
                     <connections>
                         <outlet property="currentWeatherView" destination="sFy-BP-e9N" id="JOX-Kq-fYu"/>
                         <outlet property="detailsView" destination="qEm-S6-V9u" id="yN5-c6-5vH"/>
+                        <outlet property="locationBtn" destination="yqK-xX-rsM" id="lIA-61-ubg"/>
                         <outlet property="placesTV" destination="b7j-Ts-p60" id="Er2-86-AZn"/>
                         <outlet property="refreshBtn" destination="TsW-0x-fTB" id="TLE-Z3-Crv"/>
                         <outlet property="scrollView" destination="E1l-Fp-lxh" id="PF2-dN-XNt"/>
@@ -555,6 +569,7 @@
     <resources>
         <image name="11d" width="171" height="171"/>
         <image name="11n" width="171" height="171"/>
+        <image name="location" width="32" height="32"/>
         <image name="reload" width="32" height="32"/>
         <image name="sunrise" width="171" height="171"/>
         <image name="sunset" width="171" height="171"/>

@@ -3,6 +3,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--View Controller-->
@@ -20,13 +21,31 @@
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="launchScreen" translatesAutoresizingMaskIntoConstraints="NO" id="IVN-H5-Goc">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                             </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logos" translatesAutoresizingMaskIntoConstraints="NO" id="LaX-Bo-eOt">
+                                <rect key="frame" x="208" y="497.5" width="184" height="63"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="184" id="7Tt-Fm-PId"/>
+                                    <constraint firstAttribute="height" constant="63" id="UsT-AM-rAZ"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Weather data provided by OpenWeatherMap.org" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="y7i-97-PW4">
+                                <rect key="frame" x="20" y="575.5" width="560" height="16.5"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
+                                <color key="textColor" red="0.40000000600000002" green="0.40000000600000002" blue="0.40000000600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="IVN-H5-Goc" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leading" id="HzR-JZ-f5e"/>
+                            <constraint firstItem="y7i-97-PW4" firstAttribute="top" secondItem="LaX-Bo-eOt" secondAttribute="bottom" constant="15" id="NBH-Z3-Ghf"/>
                             <constraint firstAttribute="trailing" secondItem="IVN-H5-Goc" secondAttribute="trailing" id="OZc-ku-Vj1"/>
+                            <constraint firstItem="y7i-97-PW4" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leadingMargin" id="Qa7-cv-Zve"/>
+                            <constraint firstItem="xb3-aO-Qok" firstAttribute="top" secondItem="y7i-97-PW4" secondAttribute="bottom" constant="8" id="Ryw-id-7U9"/>
                             <constraint firstItem="IVN-H5-Goc" firstAttribute="top" secondItem="Ze5-6b-2t3" secondAttribute="top" id="UWN-SV-POZ"/>
                             <constraint firstItem="xb3-aO-Qok" firstAttribute="top" secondItem="IVN-H5-Goc" secondAttribute="bottom" id="YDo-rD-tO6"/>
+                            <constraint firstItem="LaX-Bo-eOt" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="bgx-qh-M7Z"/>
+                            <constraint firstItem="y7i-97-PW4" firstAttribute="trailing" secondItem="Ze5-6b-2t3" secondAttribute="trailingMargin" id="gur-XW-SVR"/>
                         </constraints>
                     </view>
                 </viewController>
@@ -37,5 +56,6 @@
     </scenes>
     <resources>
         <image name="launchScreen" width="800" height="800"/>
+        <image name="logos" width="272" height="114"/>
     </resources>
 </document>

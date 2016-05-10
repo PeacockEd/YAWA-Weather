@@ -25,6 +25,7 @@ class LocationManager: NSObject, CLLocationManagerDelegate {
     
     private let locationManager = CLLocationManager()
     private var _currentChosenLocation: SavedLocation?
+    private var _authStatus: Bool = false
     //private var geoCoder = CLGeocoder()
     
     
@@ -35,6 +36,12 @@ class LocationManager: NSObject, CLLocationManagerDelegate {
         }
         set {
             _currentChosenLocation = newValue
+        }
+    }
+    
+    var authStatus: Bool {
+        get {
+            return _authStatus
         }
     }
     
@@ -49,12 +56,25 @@ class LocationManager: NSObject, CLLocationManagerDelegate {
     {
         if CLLocationManager.authorizationStatus() != .AuthorizedWhenInUse {
             locationManager.requestWhenInUseAuthorization()
+        } else {
+            _authStatus = true
         }
     }
     
     func locationManager(manager: CLLocationManager, didFailWithError error: NSError)
     {
         delegate?.locationDidFailWithError(error, message: .LOCATION_FAILED_ERROR)
+    }
+    
+    func locationManager(manager: CLLocationManager, didChangeAuthorizationStatus status: CLAuthorizationStatus) {
+        print(status.rawValue)
+        
+        switch status {
+        case .AuthorizedAlways, .AuthorizedWhenInUse:
+            _authStatus = true
+        default:
+            _authStatus = false
+        }
     }
     
     func locationManager(manager: CLLocationManager, didUpdateToLocation newLocation: CLLocation, fromLocation oldLocation: CLLocation)
