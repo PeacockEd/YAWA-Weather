@@ -6,7 +6,7 @@ started to name their subdomains with this same convention and I guess it stuck.
 
 #### Purpose
 This app was created in order to demo my abilities for creating a production release quality app. This app started out 
-simple, and grew into something more complicated as I coded. tested, and formulated my own 'wish list'. The app 
+simple, and grew into something more complicated as I coded, tested, and formulated my own 'wish list'. The app 
 demonstrates everything great about iOS. From Swift 2.0, Storyboards, best coding practices, MVC, error handling, 
 multi-threading and background downloading, Location classes, usage of 3rd party Public API's (APIs supplied by Google and 
 OpenWeatherMap.org), clean design strategy, custom Launch files, and user defaults. It's all in here!
